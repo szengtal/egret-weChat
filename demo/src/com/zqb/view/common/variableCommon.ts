@@ -146,8 +146,8 @@ module weChat {
 
         public testCae(str: string = "(101)test<1>gfrg<2>rggs<3>gr<4>") {
            var _loadingMc1 = weChat.LobbyResUtil.createMovieClicp("sz_Lobby_Loading", "loadingMc1");
-         _loadingMc1.x = (weChat.LobbyDataCache.defaultWidth) / 2;
-        _loadingMc1.y = (weChat.LobbyDataCache.defaultHeight) / 2 - 15;
+         _loadingMc1.x = (weChat.LobbyDataCache.defaultWidth) / 2-300;
+        _loadingMc1.y = (weChat.LobbyDataCache.defaultHeight) / 2 - 150;
         _loadingMc1.play(-1);
         egret.MainContext.instance.stage.addChild(_loadingMc1)
 
