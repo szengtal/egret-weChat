@@ -40,9 +40,9 @@ module weChat {
 			} else {
 				popUpMask.visible = false;
 			}
-			// egret.MainContext.instance.stage.addChild(target)
+			egret.MainContext.instance.stage.addChild(target)
 			// this.getContainer().addChild(popUpMask);
-			this.getContainer().addChild(target);
+			// this.getContainer().addChild(target);
 			var targetX: number;
 			var targetY: number;
 			if (center) {

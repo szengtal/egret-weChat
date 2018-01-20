@@ -16,6 +16,8 @@ module weChat {
 			// MJLobbyInfo.mainUILayer.addChild(this._main);
 			this.initGame();
 			this.addListener();
+			console.error("dddddssd");
+			
 		}
 
 		private addListener(): void {

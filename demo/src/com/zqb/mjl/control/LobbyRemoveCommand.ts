@@ -25,8 +25,8 @@ module weChat {
         private removeMediator():void{
             if(ViewConfig.mainMediator){
                 // var mainMediator:any=uniLib.getDefinitionByName(ViewConfig.mainMediatorName);
-                MahJongLobbyFacade.getLobbyInstance().removeMediator("MahJongLobbyMediator");
-                ViewConfig.mainMediator=null;
+                // MahJongLobbyFacade.getLobbyInstance().removeMediator("MahJongLobbyMediator");
+                // ViewConfig.mainMediator=null;
             }
             
         }

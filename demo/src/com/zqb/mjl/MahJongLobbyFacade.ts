@@ -55,8 +55,9 @@ module weChat {
 		}
 
 		public  removeMediator(name:string):void{
+			
 			for(var i:number=0;i<MahJongLobbyFacade._mediatorArr.length;i++){
-				if(MahJongLobbyFacade._mediatorArr[i].name==name){
+				if(MahJongLobbyFacade._mediatorArr[i]&&MahJongLobbyFacade._mediatorArr[i]["name"]==name){
 					MahJongLobbyFacade._mediatorArr[i].onRemove();
 					MahJongLobbyFacade._mediatorArr.splice(i,1);
 					break;
