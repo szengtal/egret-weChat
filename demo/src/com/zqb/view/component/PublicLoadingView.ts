@@ -71,12 +71,12 @@ class PublicLoadingView extends egret.Sprite {
         }
 
         if (!this._progTxt) {
-            this._progTxt = weChat.LobbyResUtil.createTextFeild(0xf57e27, egret.HorizontalAlign.CENTER, "", 22, 351, uniLib.Global.screenHeight - (154 * uniLib.ScreenUtils.scaleFactor), 246);
+            this._progTxt = weChat.LobbyResUtil.createTextFeild(0xf57e27, egret.HorizontalAlign.CENTER, "", 22, 351, uniLib.Global.screenHeight - (154 ), 246);
             //  this.addChild(this._progTxt);
         }
 
         if (!this.explain_txf) {
-            this.explain_txf = weChat.LobbyResUtil.createTextFeild(0xf57e27, egret.HorizontalAlign.CENTER, "", 24, 490, uniLib.Global.screenHeight - (180 * uniLib.ScreenUtils.scaleFactor), 246);
+            this.explain_txf = weChat.LobbyResUtil.createTextFeild(0xf57e27, egret.HorizontalAlign.CENTER, "", 24, 490, uniLib.Global.screenHeight - (180 ), 246);
             this.addChild(this.explain_txf);
         }
         

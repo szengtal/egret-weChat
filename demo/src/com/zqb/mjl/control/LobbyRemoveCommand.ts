@@ -24,14 +24,14 @@ module weChat {
         }
         private removeMediator():void{
             if(ViewConfig.mainMediator){
-                var mainMediator:any=uniLib.getDefinitionByName(ViewConfig.mainMediatorName);
-                MahJongLobbyFacade.getLobbyInstance().removeMediator(mainMediator.NAME);
+                // var mainMediator:any=uniLib.getDefinitionByName(ViewConfig.mainMediatorName);
+                MahJongLobbyFacade.getLobbyInstance().removeMediator("MahJongLobbyMediator");
                 ViewConfig.mainMediator=null;
             }
             
         }
         private removeProxy():void{
-             MahJongLobbyFacade.getLobbyInstance().removeProxy(LobbyServerMJProxy.NAME);
+            //  MahJongLobbyFacade.getLobbyInstance().removeProxy(LobbyServerMJProxy.NAME);
         }
         public onRemove():void{
             MJLobbyEventListener.getInstance().removeEventListener(MahJongLobbyFacadeConsts.DESTORY,this.onEventHandle,this)

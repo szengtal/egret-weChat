@@ -5,7 +5,7 @@ module Cmd {
         facade.sendNotification(cmd, obj, type);
     }
     export function trace(rev: any, str: string = ""): void {
-        uniLib.Console.log(str + " "/*+rev.GetType()*/, JSON.stringify(rev));
+        console.log(str + " "/*+rev.GetType()*/, JSON.stringify(rev));
     }
     /*
      * login
@@ -22,11 +22,11 @@ module Pmd {
 
    
 }
-onerror = function (errorMessage: any, scriptURI?: any, lineNumber?: any, columnNumber?: any, errorObj?: any) {
-    var str = "游戏异常捕获:gameid:" + uniLib.Global.gameId + ":lobbyid:" + uniLib.Global.lobbyGameId + ":" + errorMessage + "url:" + scriptURI + "line:" + lineNumber;
-    uniLib.Console.error(str);
-    if (uniLib["DebugView"]) {
-        uniLib["DebugView"].Instance.addLog(str);
-    }
-    //uniLib["DebugView"].Instance.show();
-}
+// onerror = function (errorMessage: any, scriptURI?: any, lineNumber?: any, columnNumber?: any, errorObj?: any) {
+//     var str = "游戏异常捕获:gameid:" + uniLib.Global.gameId + ":lobbyid:" + uniLib.Global.lobbyGameId + ":" + errorMessage + "url:" + scriptURI + "line:" + lineNumber;
+//     console.error(str);
+//     if (uniLib["DebugView"]) {
+//         uniLib["DebugView"].Instance.addLog(str);
+//     }
+//     //uniLib["DebugView"].Instance.show();
+// }

@@ -65,27 +65,19 @@ class Main extends egret.DisplayObjectContainer {
         var a = {};
 
         var initData: uniLib.initOptions = <uniLib.initOptions>{};
-        initData.compressType = uniLib.CompressType.FLATE;
         initData.lobbyMode = true;
         initData.designWidth = 1280;
         initData.designHeight = 720;
         initData.scaleMode = egret.StageScaleMode.FIXED_WIDTH;
         initData.debug = true;
-        initData.lobbyCommonResGrps = ["sz_preload", "CommonUI", "sz_lbCommonRes", "sz_table"];
-        initData.lobbyResConfigUrl = "resource/weChat.res.json";
-        initData.msgTimeOutSec = 3;
+        // initData.msgTimeOutSec = 3;
         uniLib.init(initData);
         uniLib.Global.lobbyMode = true;
         uniLib.UIMgr.instance.showLoadingTimeout(TJLoadingUI, "", 0);
         uniLib.UIMgr.instance.commonLoadUI = PublicLoadingView// ;
         uniLib.UIMgr.instance.tipsLoadUI = HaoCaiTipLoading;
         this._globalControl = weChat.GlobalControl.getInstance();
-        //设置默认分享数据
-        if (uniLib.Global.isH5) {
-            if (window && window["closeLoading"]) {
-                window["closeLoading"]();
-            }
-        }
+    
         this.loadResConfig();
 
         egret.lifecycle.addLifecycleListener((context) => {
@@ -93,11 +85,8 @@ class Main extends egret.DisplayObjectContainer {
         egret.lifecycle.onPause = () => {
             console.error("游戏被暂停了哦");
             if (uniLib.Global.isH5 == true) {
-                if (Boolean(uniLib.BrowersUtils.GetRequest("debug")) == true) {
-
-                } else {
+              
                     egret.ticker.pause();
-                }
             } else {
                 if (RELEASE)
                     egret.ticker.pause();
@@ -106,10 +95,8 @@ class Main extends egret.DisplayObjectContainer {
         egret.lifecycle.onResume = () => {
             console.error("游戏被恢复了哦");
             if (uniLib.Global.isH5 == true) {
-                if (Boolean(uniLib.BrowersUtils.GetRequest("debug")) == true) {
-                } else {
+              
                     egret.ticker.resume();
-                }
             } else {
                 if (RELEASE)
                     egret.ticker.resume();
@@ -205,6 +192,7 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene(): void {
+        			window["weChat"] = weChat;
         uniLib.SceneMgr.instance.changeScene(weChat.MJLobbyScene);
         console.error("创建游戏场景");
 
@@ -214,8 +202,6 @@ class Main extends egret.DisplayObjectContainer {
     private showLogin(): void {
         var gameId: number;
         var data: any = RES.getRes("lobbyConfig_json");
-        var config: uniLib.DefaultConfig = data["default"]
-        uniLib.Global.defaultConfig = config;
         console.error("showLogin" + data);
 
         this.loadRes();
@@ -223,10 +209,7 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     public onLogout(): void {
-        weChat.NetMgr.logout();
-        uniLib.NetMgr.logout();
         console.log("注销游戏进入" + uniLib.Global.gameId + ":" + uniLib.Global.getPlatId());
-        uniLib.GameModuleUtils.ExitGame(false);
         uniLib.SceneMgr.instance.changeScene(weChat.MJLobbyScene);
     }
 

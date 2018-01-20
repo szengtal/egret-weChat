@@ -33,8 +33,6 @@ module weChat {
      
           
             BC.addEvent(this, this.help, egret.TouchEvent.TOUCH_TAP, this.showHelp);
-            BC.addEvent(this, uniLib.Global, uniLib.ZqEvent.NATIVE_TO_EGERET, this.onNativeMessage);
-            BC.addEvent(this, uniLib.StatistcsMgr.instance, uniLib.StatistcsMgr.PING, this.netControl);
 
         }
 
@@ -71,15 +69,7 @@ module weChat {
         }
 
      
-        /**获取信号类型 */
-        private onNativeMessage(evt: uniLib.ZqEvent) {
-            if (evt.param.cmd == uniLib.ZQGameSdk.NETSTATE && evt.param.code == 0) {
-                if (evt.param.data[uniLib.ZQGameSdk.NETSTATE] == uniLib.NetState.NO_SIGNAL) {
-                    LobbyPopupManager.showMildWarnShow("网络不佳，处理中");
-                }
-            }
 
-        }
 
         /**
     * 网络检测控制

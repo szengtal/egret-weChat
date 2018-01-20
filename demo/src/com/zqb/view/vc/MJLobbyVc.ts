@@ -27,7 +27,6 @@ module weChat {
 
 
 		public initUI(): void {
-			uniLib.ZQGameSdk.getNetStateType();
 			this.bg = LobbyResUtil.createBitmapByName("Lobbybg_jpg");
 			// this.bg.height = uniLib.Global.screenHeight;
 			this.bg.width = 1280 + 3;
@@ -155,27 +154,6 @@ module weChat {
 			}
 		}
 
-		private onNavToDLS(evt: egret.TouchEvent): void {
-			// uniLib.ZQGameSdk.Login(this.onLogined,null,this);
-			//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx66b8c68f5c0bc36e&redirect_uri=http%3a%2f%2fh5sdk.zqbconnect.com%2f176%2fwechat_68%2flogin_request&response_type=code&scope=snsapi_userinfo&state=2#wechat_redirect
-			var gameId: number;
-			if (uniLib.Global.gameConfig) {
-				gameId = uniLib.Global.gameConfig.gameid;
-			} else {
-				var data: any = RES.getRes("lobbyConfig_json");
-				var config: uniLib.DefaultConfig = data["default"]
-				uniLib.Global.defaultConfig = config;
-				gameId = config.gameid;
-			}
-
-			uniLib.Utils.getCachedPlatInfo(function (data) {
-				if (data) {
-					console.error(JSON.stringify(data));
-					var code: string = uniLib.CompressUtil.base64encode(JSON.stringify(data));
-					uniLib.Global.openAgent("http://yiyuangou.bwgame.com.cn/mahjong/dist/index.html", code, uniLib.Global.platId ? uniLib.Global.platId : 0, gameId, uniLib.WEBMODEL.EXPLORER);
-				}
-			}, gameId, uniLib.Global.platId ? uniLib.Global.platId : 0)
-		}
 
 	}
 

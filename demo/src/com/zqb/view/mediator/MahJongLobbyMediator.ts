@@ -12,7 +12,8 @@ module weChat {
 		public constructor(viewComponent?: any) {
 			super(MahJongLobbyMediator.NAME, viewComponent);
 			this._main = new MJLobbyVc();
-			MJLobbyInfo.mainUILayer.addChild(this._main);
+			egret.MainContext.instance.stage.addChild(this._main)
+			// MJLobbyInfo.mainUILayer.addChild(this._main);
 			this.initGame();
 			this.addListener();
 		}
@@ -29,8 +30,10 @@ module weChat {
 			this._menuVc.y = (uniLib.Global.screenHeight - 720 > 0) ? uniLib.Global.screenHeight - 720 : 0;
 			// this._menuVc.y = (uniLib.Global.screenHeight - 204 > 0) ? uniLib.Global.screenHeight - 720 : 0;
 			this._menuVc.name = "_menuVc";
-			MJLobbyInfo.mainUILayer.addChild(this._menuVc);
-			this._menuMeditor = new MJLobbyMenuMediator(this._menuVc)
+			// MJLobbyInfo.mainUILayer.addChild(this._menuVc);
+			// this._menuMeditor = new MJLobbyMenuMediator(this._menuVc)
+			egret.MainContext.instance.stage.addChild(this._menuVc)
+			
 			MahJongLobbyFacade.getLobbyInstance().registerMediator(this._menuMeditor);
 			this.showPopLayer();
 			weChat.variableCommon.getInstance().playBgMusic();
@@ -87,7 +90,6 @@ module weChat {
 			var demokReq: any = {};
 			demokReq.scene = roomtype;
 			this.sendNotification(MahJongLobbyFacadeConsts.SEND_DATA, demokReq, LobbyDataRequestCommand.GAME_DATA);
-			NetMgr.setMsgTimeout(5, "Cmd.ReturnRoomCmd_C");  
 			//uniLib.UIMgr.instance.showLoadingTimeout(HaoCaiTipLoading, "recharge");
 
 		}

@@ -50,7 +50,7 @@ module weChat {
             return texture;
         }
         public static trace(...str: any[]): void {
-            uniLib.Console.log(str.join(","));
+            console.log(str.join(","));
         }
         public static randRange(min: number, max: number): number {
             var num: number = max - min;

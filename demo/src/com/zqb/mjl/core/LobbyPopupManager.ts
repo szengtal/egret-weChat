@@ -52,9 +52,9 @@ module weChat {
 					targetX = LobbyDataCache.defaultWidth - target.width >> 1;
 				}
 				if (h) {
-					targetY = (LobbyDataCache.defaultHeight * uniLib.ScreenUtils.scaleFactor - h) / 2;
+					targetY = (LobbyDataCache.defaultHeight  - h) / 2;
 				} else {
-					targetY = (LobbyDataCache.defaultHeight * uniLib.ScreenUtils.scaleFactor - target.height) / 2;
+					targetY = (LobbyDataCache.defaultHeight  - target.height) / 2;
 				}
 			}
 			else {

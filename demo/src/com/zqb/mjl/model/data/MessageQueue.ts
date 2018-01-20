@@ -26,7 +26,7 @@ module weChat {
                 msgBox.setData(item.title, item.text, labelArr, [item.confirmCallBack, item.cancelCallBack], this);
                 msgBox.x = Math.round((LobbyDataCache.defaultWidth - msgBox.width) / 2);
                 msgBox.y = Math.round((LobbyDataCache.defaultHeight - msgBox.height) / 2);
-                uniLib.PopUpMgr.addPopUp(msgBox, weChat.MJLobbyInfo.topLayer, true, false);
+                // uniLib.PopUpMgr.addPopUp(msgBox, weChat.MJLobbyInfo.topLayer, true, false);
             }
             this.clear();
         }

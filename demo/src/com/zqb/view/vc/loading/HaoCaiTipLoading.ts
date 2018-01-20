@@ -41,7 +41,7 @@ class HaoCaiTipLoading extends egret.Sprite {
         uniLib.DragonUtils.removeFastDragonbyContainer(this);
         if (this._loadingMc1) {
             this._loadingMc1.stop();
-            uniLib.DisplayUtils.removeFromParent(this._loadingMc1);
+            // uniLib.DisplayUtils.removeFromParent(this._loadingMc1);
         }
         this._loadingMc1 = null;
         

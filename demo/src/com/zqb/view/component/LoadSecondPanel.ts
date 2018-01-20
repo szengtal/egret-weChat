@@ -31,7 +31,7 @@ class LoadSecondPanel extends egret.Sprite {
             this._armature.animation.play();
         }else{
             this.init();
-            // uniLib.Console.error("LoadSecondPanel onAddToStageHandler err,临时处理,等qiqiongqiong搞定,WHJ");
+            // console.error("LoadSecondPanel onAddToStageHandler err,临时处理,等qiqiongqiong搞定,WHJ");
         }
     }
 

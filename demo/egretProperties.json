@@ -3,7 +3,7 @@
   "compilerVersion": "5.1.2",
   "template": {},
   "target": {
-    "current": "web"
+    "current": "wxgame"
   },
   "eui": {
     "exmlRoot": [
@@ -33,16 +33,14 @@
 		{
 			"name": "dragonbones"
 		},
-    {
-      "name": "promise"
-    },
-    	{
-			"name": "uniLib",
-			"path": "../uniLib"
-		},
+
 		{
 			"name": "pureMvc",
-			"path": "./pureMvc"
-		}
+			"path": "../pureMvc"
+		},
+    {
+      "name": "promise"
+    }
+    
   ]
 }

@@ -53,8 +53,8 @@ module weChat {
         private initMediator(): void {
             // var main:MJLobbyVc=new MJLobbyVc();
             // MJLobbyInfo.mainUILayer.addChild(main);
-            var mainMediator: any = uniLib.getDefinitionByName(ViewConfig.mainMediatorName);
-            ViewConfig.mainMediator = new mainMediator();
+            // var mainMediator: any = uniLib.getDefinitionByName(ViewConfig.mainMediatorName);
+            ViewConfig.mainMediator = new MahJongLobbyMediator();
             MahJongLobbyFacade.getLobbyInstance().registerMediator(ViewConfig.mainMediator);
         }
         private initProxy(): void {

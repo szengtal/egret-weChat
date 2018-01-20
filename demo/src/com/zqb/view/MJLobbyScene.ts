@@ -7,6 +7,9 @@ module weChat {
 			super();
 		}
 		public start(e: egret.Event = null): void {
+			var a = new uniLib.LobbyScene();
+			this.addGame(a)
+
 			MJLobbyInfo.uiLayer = this.uiLayer;
 			MJLobbyInfo.mainUILayer = this.uiLayer;
 			this.uiLayer.visible = true;

@@ -19,7 +19,7 @@ module weChat {
 			var socketProxy: weChat.LobbyServerMJProxy =LobbyServerMJProxy.getInstance();
 			switch(evt.type) {
 				 case LobbyDataRequestCommand.GAME_DATA:
-                    socketProxy.sendData(evt.data);
+                    // socketProxy.sendData(evt.data);
                    break;
 				case LobbyDataRequestCommand.CONNECT_GAME_SERVER:
                    socketProxy.initServer();

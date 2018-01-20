@@ -397,7 +397,7 @@
             puremvc.Notifier = Notifier;    
         })(puremvc || (puremvc = {}));
         
-        var __extends = this.__extends || function (d, b) {
+        var _extends =  function (d, b) {
             function __() { this.constructor = d; }
             __.prototype = b.prototype;
             d.prototype = new __();
@@ -406,7 +406,7 @@
         (function (puremvc) {
             "use strict";
             var MacroCommand = (function (_super) {
-                __extends(MacroCommand, _super);
+                _extends(MacroCommand, _super);
                 function MacroCommand() {
                         _super.call(this);
                     this.subCommands = null;
@@ -437,7 +437,7 @@
         (function (puremvc) {
             "use strict";
             var SimpleCommand = (function (_super) {
-                __extends(SimpleCommand, _super);
+                _extends(SimpleCommand, _super);
                 function SimpleCommand() {
                     _super.apply(this, arguments);
         
@@ -453,7 +453,7 @@
         (function (puremvc) {
             "use strict";
             var Mediator = (function (_super) {
-                __extends(Mediator, _super);
+                _extends(Mediator, _super);
                 function Mediator(mediatorName, viewComponent) {
                     if (typeof mediatorName === "undefined") { mediatorName = null; }
                     if (typeof viewComponent === "undefined") { viewComponent = null; }
@@ -491,7 +491,7 @@
         (function (puremvc) {
             "use strict";
             var Proxy = (function (_super) {
-                __extends(Proxy, _super);
+                _extends(Proxy, _super);
                 function Proxy(proxyName, data) {
                     if (typeof proxyName === "undefined") { proxyName = null; }
                     if (typeof data === "undefined") { data = null; }

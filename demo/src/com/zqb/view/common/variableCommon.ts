@@ -42,7 +42,6 @@ module weChat {
             this.LobbyTempMap = new Map();
             this.LobbyPopArray = [];
             this.redPointBtnMap = new Map();
-            this.goodData = weChat.TableGoodsConfig.instance();
             Object.freeze(this.goodData)
             this._popLayer = new LobbyPopLayer;
         }
@@ -55,11 +54,7 @@ module weChat {
 
         }
 
-        public get _signData():weChat.LobbyTaskConfig[]{
-            this.signData = weChat.LobbyTaskConfig.signData();
-            Object.freeze(this.signData);
-            return this.signData;
-        }
+     
         /**移除制定面板 
          * @param {key}
         */
@@ -111,20 +106,11 @@ module weChat {
         }
         /**隐藏虚拟按键 */
         public removeVirtual() {
-            uniLib.ZQGameSdk.hideVk();
+            // uniLib.ZQGameSdk.hideVk();
         }
 
         public playBgMusic() {
-            if (uniLib.Utils.getLocalStorage("MusicVolime")) {
-                uniLib.SoundMgr.instance.musicVolume = uniLib.Utils.getLocalStorage("MusicVolime");
-            } else {
-                uniLib.SoundMgr.instance.musicVolume = 0.5;
-            }
-            if (uniLib.Utils.getLocalStorage("SoundVolime")) {
-                uniLib.SoundMgr.instance.soundVolume = uniLib.Utils.getLocalStorage("SoundVolime");
-            } else {
-                uniLib.SoundMgr.instance.soundVolume = 1;
-            }
+         
             if (uniLib.SoundMgr.instance.musicVolume != 0) {
            //     uniLib.SoundMgr.instance.playBgMusic(["bg2_mp3"]);
             }

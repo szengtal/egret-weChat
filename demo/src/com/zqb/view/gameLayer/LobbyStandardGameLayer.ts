@@ -26,7 +26,7 @@ module weChat {
 
           
        
-            uniLib.DragonUtils.removeFastDragonbyContainer(this);
+            // uniLib.DragonUtils.removeFastDragonbyContainer(this);
             uniLib.DisplayUtils.removeAllChildren(this);
             uniLib.DisplayUtils.removeFromParent(this);
         }
