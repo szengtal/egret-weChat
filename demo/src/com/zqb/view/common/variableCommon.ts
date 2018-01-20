@@ -145,17 +145,11 @@ module weChat {
         }
 
         public testCae(str: string = "(101)test<1>gfrg<2>rggs<3>gr<4>") {
-            //     window["dynamicCode"] = `weChat.variableCommon.getInstance().destroyPanelByAndroid()`
-            //     var a =    window['eval'].call(window, window["dynamicCode"]);
-
-            //     var a =     new Function(window["dynamicCode"])()
-            //     var a =   eval("weChat.variableCommon.getInstance().destroyPanelByAndroid()")
-            //     console.error("ddddddddddd", a);
-            // weChat.variableCommon.getInstance().removeRedPoint();
-        //    var bg = LobbyResUtil.createBitmapByName("Lobbybg_jpg");
-        //    egret.MainContext.instance.stage.addChild(bg)
-
-                   uniLib.SceneMgr.instance.changeScene(weChat.MJLobbyScene);
+           var _loadingMc1 = weChat.LobbyResUtil.createMovieClicp("sz_Lobby_Loading", "loadingMc1");
+         _loadingMc1.x = (weChat.LobbyDataCache.defaultWidth) / 2;
+        _loadingMc1.y = (weChat.LobbyDataCache.defaultHeight) / 2 - 15;
+        _loadingMc1.play(-1);
+        egret.MainContext.instance.stage.addChild(_loadingMc1)
 
         }
 
