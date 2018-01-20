@@ -1,0 +1,147 @@
+{
+	"groups": [
+		{
+			"keys": "lobbyConfig_json,preLoad_bg_png,preLoad_icon_png",
+			"name": "sz_preload"
+		},
+		{
+			"keys": "TableCoinHundredConfig_json,gameList_json,LobbyTaskConfig_json",
+			"name": "sz_table"
+		},
+		{
+			"keys": "help_png,backHome_png,sz_Lobby_Help_json,sz_Lobby_Scene_json,Lobbybg_jpg,sz_Lobby_market_fnt_fnt,loading_png,common_png,sz_Lobby_Helpstand_png,sz_Lobby_HelpHund_png",
+			"name": "sz_assets"
+		},
+		{
+			"keys": "sz_Lobby_Loading_png,sz_Lobby_Loading_json",
+			"name": "CommonUI"
+		},
+		{
+			"keys": "newPlayerOpen_mp3,newPlayerDrop_mp3,buttonClick_mp3,buttonSwitch_mp3,rewardSound_mp3",
+			"name": "sz_sound"
+		},
+		{
+			"name": "preload",
+			"keys": ",,"
+		}
+	],
+	"resources": [
+		{
+			"name": "gameList_json",
+			"type": "json",
+			"url": "table/gameList.json"
+		},
+		{
+			"name": "lobbyConfig_json",
+			"type": "json",
+			"url": "config/lobbyConfig.json"
+		},
+		{
+			"name": "Lobbybg_jpg",
+			"type": "image",
+			"url": "assets/lobby/main/Lobbybg.jpg"
+		},
+		{
+			"name": "sz_Lobby_market_fnt_fnt",
+			"type": "font",
+			"url": "assets/lobby/font/sz_Lobby_market_fnt.fnt"
+		},
+		{
+			"name": "newPlayerOpen_mp3",
+			"type": "sound",
+			"url": "assets/sound/newPlayerOpen.mp3"
+		},
+		{
+			"name": "newPlayerDrop_mp3",
+			"type": "sound",
+			"url": "assets/sound/newPlayerDrop.mp3"
+		},
+		{
+			"name": "buttonClick_mp3",
+			"type": "sound",
+			"url": "assets/sound/buttonClick.mp3"
+		},
+		{
+			"name": "buttonSwitch_mp3",
+			"type": "sound",
+			"url": "assets/sound/buttonSwitch.mp3"
+		},
+		{
+			"name": "rewardSound_mp3",
+			"type": "sound",
+			"url": "assets/sound/rewardSound.mp3"
+		},
+		{
+			"name": "sz_Lobby_Loading_png",
+			"type": "image",
+			"url": "assets/dragonMovie/sz_Lobby_Loading.png"
+		},
+		{
+			"name": "sz_Lobby_Loading_json",
+			"type": "json",
+			"url": "assets/dragonMovie/sz_Lobby_Loading.json"
+		},
+		{
+			"name": "loading_png",
+			"type": "image",
+			"url": "assets/lobby/main/loading.png"
+		},
+		{
+			"name": "preLoad_bg_png",
+			"type": "image",
+			"url": "assets/preLoad_bg.png"
+		},
+		{
+			"name": "preLoad_icon_png",
+			"type": "image",
+			"url": "assets/preLoad_icon.png"
+		},
+		{
+			"name": "common_png",
+			"type": "image",
+			"url": "assets/lobby/main/common.png"
+		},
+		{
+			"name": "sz_Lobby_Helpstand_png",
+			"type": "image",
+			"url": "assets/lobby/main/sz_Lobby_Helpstand.png"
+		},
+		{
+			"name": "sz_Lobby_HelpHund_png",
+			"type": "image",
+			"url": "assets/lobby/main/sz_Lobby_HelpHund.png"
+		},
+		{
+			"name": "sz_Lobby_Scene_json",
+			"type": "sheet",
+			"url": "assets/lobby/main/sz_Lobby_Scene.json",
+			"subkeys": "common,sz_Lobby_Item1,sz_Lobby_Item2,sz_Lobby_Item3,sz_Lobby_Item4,sz_Lobby_Item5,sz_lobby_stadard"
+		},
+		{
+			"name": "sz_Lobby_Help_json",
+			"type": "sheet",
+			"url": "assets/lobby/main/sz_Lobby_Help.json",
+			"subkeys": "sz_Lobby_help_btn1,sz_Lobby_help_btn2"
+		},
+		{
+			"name": "backHome_png",
+			"type": "image",
+			"url": "assets/lobby/main/backHome.png"
+		},
+		{
+			"name": "LobbyTaskConfig_json",
+			"type": "json",
+			"url": "table/LobbyTaskConfig.json"
+		},
+		{
+			"name": "TableCoinHundredConfig_json",
+			"type": "json",
+			"url": "table/TableCoinHundredConfig.json"
+		},
+		{
+			"name": "help_png",
+			"type": "image",
+			"url": "assets/lobby/main/help.png"
+		}
+	]
+}

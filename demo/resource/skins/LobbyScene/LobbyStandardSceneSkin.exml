@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LobbyStandardSceneSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*">
+
+	<e:Scroller id="standardScroller" width="1280" height="468.66" x="18.67" anchorOffsetX="0" anchorOffsetY="0" bounces="true" scrollPolicyV="off" y="174">
+		<e:List id="roomList" width="1280" itemRendererSkinName="LobbyStandardItemSkin" anchorOffsetX="0"
+		        anchorOffsetY="0" y="-95"  height="515.33" x="-1.33">
+			<e:ArrayCollection>
+				<e:Array>
+					<e:Object/>
+					<e:Object/>
+					<e:Object dsf="null" />
+					<e:Object dsf="null" />
+					<e:Object dsf="null" />
+					<e:Object dsf="null" />
+					<e:Object dsf="null" />
+				</e:Array>
+			</e:ArrayCollection>
+			<e:layout>
+				<e:HorizontalLayout gap="60" paddingLeft="53" />
+			</e:layout>
+		</e:List>
+	</e:Scroller>
+
+	<weChat:BaseButton id="backToMain" name="backToMain" x="9.06" y="11" >
+                <weChat:skinName>
+                    <e:Skin states="up,down,disabled">
+                        <e:Image  source="backHome_png"
+                                 source.down="backHome_png" source.disabled=""  width="120" height="120"/>
+                    </e:Skin>
+                </weChat:skinName>
+    </weChat:BaseButton>
+
+	
+
+
+
+
+</e:Skin>

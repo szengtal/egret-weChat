@@ -1,0 +1,25 @@
+{
+  "file": "sz_Lobby_Help.png",
+  "frames": {
+    "sz_Lobby_help_btn1": {
+      "x": 0,
+      "y": 0,
+      "w": 159,
+      "h": 100,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 159,
+      "sourceH": 100
+    },
+    "sz_Lobby_help_btn2": {
+      "x": 0,
+      "y": 102,
+      "w": 145,
+      "h": 95,
+      "offX": 0,
+      "offY": 0,
+      "sourceW": 145,
+      "sourceH": 95
+    }
+  }
+}

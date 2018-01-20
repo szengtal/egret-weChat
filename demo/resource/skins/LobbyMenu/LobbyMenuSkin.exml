@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LobbyMenuSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*" >
+			<!--<e:Component id="topMenu" width="20" height="20" x="0" y="0" skinName="LobbyMainSceneSkin" visible="false"/>-->
+        <e:Group id="BottomMenu" width="1280" height="204" y="518" anchorOffsetY="0">
+        
+
+        <weChat:BaseButton  label="菜单1" x="475.32" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+		<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+     <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
+			<e:Label id="labelDisplay"  horizontalCenter="0" verticalCenter="0" textColor="0x160606"/>
+			</e:Skin>
+		</weChat:skinName>
+	</weChat:BaseButton>
+
+    <weChat:BaseButton  label="菜单2" x="588.32" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+		<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+     <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
+			<e:Label id="labelDisplay"  horizontalCenter="0" verticalCenter="0" textColor="0x160606"/>
+			</e:Skin>
+		</weChat:skinName>
+	</weChat:BaseButton>
+
+        <weChat:BaseButton  label="菜单3" x="701.32" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+		<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+     <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
+			<e:Label id="labelDisplay"  horizontalCenter="0" verticalCenter="0" textColor="0x160606"/>
+			</e:Skin>
+		</weChat:skinName>
+	</weChat:BaseButton>
+
+        <weChat:BaseButton  label="菜单4" x="808.32" y="162.02" anchorOffsetX="55.32" anchorOffsetY="31.02" width="113" height="71">
+		<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+     <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
+			<e:Label id="labelDisplay"  horizontalCenter="0" verticalCenter="0" textColor="0x160606"/>
+			</e:Skin>
+		</weChat:skinName>
+	</weChat:BaseButton>
+    
+
+        </e:Group>
+
+</e:Skin>

@@ -1,0 +1,15 @@
+{
+    "resourcePlugin": {
+        "configs": [
+            {
+                "configPath": "resource/weChat.res.json",
+                "relativePath": "resource/"
+            },
+            {
+                "configPath": "resource/weChat.res.json",
+                "relativePath": "resource/"
+            }
+        ]
+    },
+    "theme": "resource/weChat.thm.json"
+}

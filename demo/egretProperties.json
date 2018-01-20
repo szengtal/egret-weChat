@@ -1,0 +1,48 @@
+{
+  "engineVersion": "5.1.2",
+  "compilerVersion": "5.1.2",
+  "template": {},
+  "target": {
+    "current": "web"
+  },
+  "eui": {
+    "exmlRoot": [
+      "resource/"
+    ],
+    "themes": [
+      "resource/weChat.thm.json"
+    ],
+    "exmlPublishPolicy": "commonjs"
+  },
+  "modules": [
+    {
+      "name": "egret"
+    },
+    {
+      "name": "eui"
+    },
+	{
+      "name": "game"
+    },
+    {
+      "name": "assetsmanager"
+    },
+    {
+      "name": "tween"
+    },
+		{
+			"name": "dragonbones"
+		},
+    {
+      "name": "promise"
+    },
+    	{
+			"name": "uniLib",
+			"path": "../uniLib"
+		},
+		{
+			"name": "pureMvc",
+			"path": "./pureMvc"
+		}
+  ]
+}

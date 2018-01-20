@@ -1,0 +1,6 @@
+[
+{"id":1,"taskTitle":"微信小游戏","taskDesc":"每日首次微信小游戏，免费领取%b！","taskType":5,"progressType":0,"gameId":[],"taskCondition":1,"rewardNum":1,"taskIcon":"","taskReward":[{"goodId":32,"goodNbr":1000}],"isOnList":1,"noReset":0,"sceneidid":0},
+{"id":2,"taskTitle":"微信小游戏","taskDesc":"微信小游戏%b！","taskType":6,"progressType":0,"gameId":[],"taskCondition":1,"rewardNum":1,"taskIcon":"","taskReward":[{"goodId":32,"goodNbr":1000}],"isOnList":1,"noReset":0,"sceneidid":0},
+{"id":3,"taskTitle":"微信小游戏","taskDesc":"微信小游戏%b！","taskType":1,"progressType":1,"gameId":[173],"taskCondition":3,"rewardNum":1,"taskIcon":"","taskReward":[{"goodId":32,"goodNbr":1000}],"isOnList":1,"noReset":0,"sceneidid":0},
+{"id":4,"taskTitle":"微信小游戏","taskDesc":"微信小游戏%b！","taskType":7,"progressType":0,"gameId":[],"taskCondition":500,"rewardNum":1,"taskIcon":"","taskReward":[{"goodId":32,"goodNbr":2000}],"isOnList":1,"noReset":0,"sceneidid":0}
+]

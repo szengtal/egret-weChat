@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LobbyHelpPanelSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*">
+<e:Rect width="1014" height="579" x="143" y="90.8" fillColor="0x7b2693" strokeColor="0x3185c4" strokeWeight="2"/>
+
+    <e:ToggleSwitch id="hundredBtn" y="404.38" name="hundred" label="切换按钮" x="160" selected="false" scaleX="1.1" scaleY="1.1">
+		<e:Skin states="up,down,disabled">
+			<e:Image source="sz_Lobby_help_btn2" source.up="sz_Lobby_help_btn2" source.down="sz_Lobby_help_btn1"  />
+            
+		</e:Skin>
+	</e:ToggleSwitch>
+    <e:ToggleSwitch id="standardBtn" y="195.4" name="standard" label="切换按钮" x="160" selected="true" scaleX="1.1" scaleY="1.1">
+		<e:Skin states="up,down,disabled">
+			<e:Image source="sz_Lobby_help_btn1" source.up="sz_Lobby_help_btn2" source.down="sz_Lobby_help_btn1" />
+		</e:Skin>
+	</e:ToggleSwitch>
+	<e:Scroller id="helpScroll" width="793.67" height="420" x="323" y="195" anchorOffsetX="0" anchorOffsetY="0" scrollPolicyH="off">
+	<e:Group id="helpGroup" anchorOffsetX="0" width="791.34" anchorOffsetY="0" height="420">
+		<e:Image id="helpContent1" y="1" source="sz_Lobby_Helpstand_png" x="0" width="792"/>
+		<e:Image id="helpContent2" x="0" y="0" anchorOffsetX="0" source="sz_Lobby_HelpHund_png" width="791"/>
+	</e:Group>
+	</e:Scroller>
+	<weChat:BaseButton  id="helpClose" label=""  x="1161.73" y="104.8" anchorOffsetX="60.23" anchorOffsetY="48.5" width="111" height="111">
+		<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="common_png" source.down="common_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</weChat:skinName>
+	</weChat:BaseButton>
+
+</e:Skin>
