@@ -17,7 +17,13 @@ module weChat {
 		public static LOBBY_SHOW_HELP: string = "lobby_show_help";
 	
 	
+	/**重置人物 */
+		public static RESET_MAN_POSITION: string = "reset_man_position";
+		/**人物向左*/
+		public static TURN_LEFT: string = "turn_left";
 
+		/**人物向右 */
+		public static TURN_RIGHT: string = "turn_right";
 		/**通用确认 */
 		public static CONFIRM: string = "confirm";
 	}

@@ -66,8 +66,8 @@ class Main extends egret.DisplayObjectContainer {
 
         var initData: uniLib.initOptions = <uniLib.initOptions>{};
         initData.lobbyMode = true;
-        initData.designWidth = 1280;
-        initData.designHeight = 720;
+        initData.designWidth = 720;
+        initData.designHeight = 1280;
         initData.scaleMode = egret.StageScaleMode.FIXED_WIDTH;
         initData.debug = true;
         // initData.msgTimeOutSec = 3;

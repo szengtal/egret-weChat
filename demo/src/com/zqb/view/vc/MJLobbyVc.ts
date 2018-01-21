@@ -28,8 +28,8 @@ module weChat {
 
 		public initUI(): void {
 			this.bg = LobbyResUtil.createBitmapByName("Lobbybg_jpg");
-			// this.bg.height = uniLib.Global.screenHeight;
-			this.bg.width = 1280 + 3;
+			this.bg.height =1280// uniLib.Global.screenHeight;
+			this.bg.width = 720 + 3;
 
         // // else
 			this.bg.x = -3

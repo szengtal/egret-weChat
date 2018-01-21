@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LobbyStandardSceneSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui"
+<e:Skin class="LobbyStandardSceneSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui"
         xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*">
 
-	<e:Scroller id="standardScroller" width="1280" height="468.66" x="18.67" anchorOffsetX="0" anchorOffsetY="0" bounces="true" scrollPolicyV="off" y="174">
+	<e:Scroller id="standardScroller" width="706" height="468.66" x="6.67" anchorOffsetX="0" anchorOffsetY="0" bounces="true" scrollPolicyV="off" y="482">
 		<e:List id="roomList" width="1280" itemRendererSkinName="LobbyStandardItemSkin" anchorOffsetX="0"
 		        anchorOffsetY="0" y="-95"  height="515.33" x="-1.33">
 			<e:ArrayCollection>

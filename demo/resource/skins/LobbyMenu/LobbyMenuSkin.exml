@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LobbyMenuSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*" >
+<e:Skin class="LobbyMenuSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*" >
 			<!--<e:Component id="topMenu" width="20" height="20" x="0" y="0" skinName="LobbyMainSceneSkin" visible="false"/>-->
-        <e:Group id="BottomMenu" width="1280" height="204" y="518" anchorOffsetY="0">
+        <e:Group id="BottomMenu" width="713.33" height="204" y="1074" anchorOffsetY="0" anchorOffsetX="0">
         
 
-        <weChat:BaseButton  label="菜单1" x="63.2" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+        <weChat:BaseButton id="resetMan"  label="人物重置" x="191.98" y="166.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
 		<weChat:skinName>
 			<e:Skin states="up,down,disabled">
      <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
@@ -13,7 +13,7 @@
 		</weChat:skinName>
 	</weChat:BaseButton>
 
-    <weChat:BaseButton  label="菜单2" x="176.2" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+    <weChat:BaseButton  id="_left" label="左" x="304.98" y="166.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
 		<weChat:skinName>
 			<e:Skin states="up,down,disabled">
      <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
@@ -22,7 +22,7 @@
 		</weChat:skinName>
 	</weChat:BaseButton>
 
-        <weChat:BaseButton  label="菜单3" x="289.2" y="162.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
+        <weChat:BaseButton id="_right" label="右" x="417.98" y="166.02" anchorOffsetX="61.32" anchorOffsetY="31.02" width="113" height="71">
 		<weChat:skinName>
 			<e:Skin states="up,down,disabled">
      <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
@@ -31,7 +31,7 @@
 		</weChat:skinName>
 	</weChat:BaseButton>
 
-        <weChat:BaseButton  label="菜单4" x="396.2" y="162.02" anchorOffsetX="55.32" anchorOffsetY="31.02" width="113" height="71">
+        <weChat:BaseButton  label="菜单4" x="524.98" y="166.02" anchorOffsetX="55.32" anchorOffsetY="31.02" width="113" height="71">
 		<weChat:skinName>
 			<e:Skin states="up,down,disabled">
      <e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db"  anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>

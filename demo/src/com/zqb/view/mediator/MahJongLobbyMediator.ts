@@ -29,7 +29,7 @@ module weChat {
 
 		private initGame(): void {
 			this._menuVc = new MJLobbyMenuVc();
-			this._menuVc.y = (uniLib.Global.screenHeight - 720 > 0) ? uniLib.Global.screenHeight - 720 : 0;
+			this._menuVc.y =egret.MainContext.instance.stage.stageHeight -1280
 			// this._menuVc.y = (uniLib.Global.screenHeight - 204 > 0) ? uniLib.Global.screenHeight - 720 : 0;
 			this._menuVc.name = "_menuVc";
 			// MJLobbyInfo.mainUILayer.addChild(this._menuVc);
