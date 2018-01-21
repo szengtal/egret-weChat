@@ -6,7 +6,7 @@ module gameMain {
 		_speed: number = 4;
 		_isStand: boolean = false
 		/**
-		 * 主角开火事件
+		 * 主角事件
 		 */
 		_heroOpenFireEvent: OpenFireEvent;
 		public constructor() {
@@ -27,17 +27,6 @@ module gameMain {
 
 				this._timer.addEventListener(egret.TimerEvent.COMPLETE, this.timerComplete, this);
 				this._timer.start();
-				// this.addEventListener(OpenFireEvent.EventString, (e: OpenFireEvent) => {
-				// 	var b = BulletFactory.Init().GetBullet();
-				// 	if (b == undefined) {
-				// 		console.log("对象池中没有对象")
-				// 		return;
-				// 	}
-				// 	var x = this.x + this.width / 2 - 5;
-				// 	var y = this.y - 18;
-				// 	b.Use(IdentityType.HERO, x, y)
-
-				// }, this)
 
 			}, this)
 			this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.destory, this);
@@ -80,8 +69,7 @@ module gameMain {
 		}
 
 		public timerFunc(e: egret.TimerEvent) {
-			// console.log("定时开火--------------------")
-			this.dispatchEvent(this._heroOpenFireEvent);
+			//this.dispatchEvent(this._heroOpenFireEvent);
 
 		}
 		public timerComplete(e: egret.TimerEvent) {

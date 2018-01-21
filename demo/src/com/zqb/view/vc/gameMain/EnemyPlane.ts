@@ -24,17 +24,6 @@ export  class EnemyPlane extends egret.DisplayObjectContainer {
 		this._timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerCom, this)
 		this._enemyOpenFireEvent = new OpenFireEvent(OpenFireEvent.EventString);
 		this._enemyOpenFireEvent.Btype = IdentityType.ENEMY;
-		// this.addEventListener(OpenFireEvent.EventString, (e: OpenFireEvent) => {
-		// 	let bullet = BulletFactory.Init().GetBullet();
-		// 	if (bullet == undefined) {
-		// 		console.log("对象池中没有对象EnemyPlane")
-		// 		return;
-		// 	}
-		// 	let bx = this.x + this.width / 2 - 5;
-		// 	let by = this.y + this.height + 10;;
-		// 	bullet.Use(e.Btype, bx, by);
-
-		// }, this)
 
 	}
 	public Fly(x: number, y: number) {
@@ -68,7 +57,6 @@ export  class EnemyPlane extends egret.DisplayObjectContainer {
 	 * 回收
 	 */
 	public Recycle() {
-		// console.log("敌机回收Ing-----")
 
 		this._timer.stop();
 		this.IsUse = false;
@@ -76,7 +64,6 @@ export  class EnemyPlane extends egret.DisplayObjectContainer {
 			this._main.removeChild(this);
 		}
 		this.removeEventListener(egret.Event.ENTER_FRAME, this.frame, this)
-		// console.log("敌机回收完成-----")
 
 
 	}

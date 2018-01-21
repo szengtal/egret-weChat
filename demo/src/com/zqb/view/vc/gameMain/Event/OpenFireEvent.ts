@@ -1,6 +1,6 @@
 module gameMain {
 export class OpenFireEvent extends egret.Event {
-	public static EventString = "开火";
+	public static EventString = "kai";
 	/**
 	 * 事件类型默认是Hero
 	 */
