@@ -1,32 +1,44 @@
 module gameMain {
 	export class HeroObject extends egret.DisplayObjectContainer {
-		_textures: egret.Texture[] = [];
-		_hero: egret.Bitmap;
-		_timer: egret.Timer;
+
 		_speed: number = 4;
 		_isStand: boolean = false
-		/**
-		 * 主角事件
-		 */
-		_heroOpenFireEvent: OpenFireEvent;
+		/**是否在跑动 */
+		_isRun: boolean = false
+
+		private _hero: egret.MovieClip;
+		/**站立的data */
+		private _standData: egret.MovieClipData;
+		/**跑动data */
+		private _runData: egret.MovieClipData;
+		/**跳落的data */
+		private _flyData: egret.MovieClipData;
+		/**标志 */
+		private timeNum: number;
+		/**向左或右标志  左 = 1*/
+		private _direction: number;
+
+		private test: egret.Sprite;
 		public constructor() {
 			super();
+
+			let mc: egret.MovieClip = weChat.LobbyResUtil.createMovieClicp("jumpMc", "stand");
+			this._standData = mc.movieClipData;
+			mc = weChat.LobbyResUtil.createMovieClicp("jumpMc", "runfast");
+			this._runData = mc.movieClipData;
+			mc = weChat.LobbyResUtil.createMovieClicp("jumpMc", "fly");
+			this._flyData = mc.movieClipData;
+
 			this.addEventListener(egret.Event.ADDED_TO_STAGE, () => {
-				this._textures[0] = RES.getRes("hero1_jpg");
-				this._textures[1] = RES.getRes("hero2_jpg");
-				this._hero = new egret.Bitmap();
-				this._hero.texture = this._textures[0];
+
+
+				this._hero = weChat.LobbyResUtil.createMovieClicp("jumpMc", "stand");
+				this._hero.play(-1);
+				this.addChild(this._hero);
 				this.width = 60;
 				this.height = 60;
 				this.addChild(this._hero)
-				this._heroOpenFireEvent = new OpenFireEvent(OpenFireEvent.EventString);
-				this._heroOpenFireEvent.Btype = IdentityType.HERO;
 				this.addEventListener(egret.Event.ENTER_FRAME, this.frame, this);
-				this._timer = new egret.Timer(GameConfig.HeroOpenFireTime);
-				this._timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-
-				this._timer.addEventListener(egret.TimerEvent.COMPLETE, this.timerComplete, this);
-				this._timer.start();
 
 			}, this)
 			this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.destory, this);
@@ -42,40 +54,71 @@ module gameMain {
 		}
 		_tag: number = 0;
 		public frame(e: egret.Event) {
-			if (this._tag >= 30) this._tag = 0;
-			if (this._tag >= 15) {
-				this._hero.texture = this._textures[0];
-			}
-			else {
-				this._hero.texture = this._textures[1];
-			}
-			this._tag += 1;
 
-			if (this._isStand) {
+
+
+			if (this._isStand && !this._isRun) {
 				this.y -= this._speed;
+				this._hero.movieClipData = this._standData;
 				if (this.y <= 0) {
 					//从父节点中移除
 					this.y = 300;
-					if (this.parent) {
-						// uniLib.DisplayUtils.removeFromParent(this)
-					}
 				}
 			}
+			else if (this._isRun) {
+				this.y -= this._speed;
+
+				if (this._direction == 0) {
+					this.x += this._speed ;
+				}
+				else if (this._direction == 1) {
+					this.x -= this._speed ;
+				}
+				this._hero.movieClipData = this._runData;
+				this._hero.play(-1);
+			}
 			else {
+				console.error("this.y += this._speed + 4;");
+
 				this.y += this._speed + 4;
+				this._hero.movieClipData = this._flyData;
+				this._hero.play(-1);
 			}
 
+			if (this.x < 0 || this.x > 720) {
+				console.error("this.x < 0 || this.x > 720");
+
+				this.x = 300;
+			}
+
+			if (this.y < 0 || this.y > 1380) {
+				console.error("this.x < 0 || this.x > 720");
+
+				this.y = 800;
+			}
+
+			if (!this.test) {
+				this.test = new egret.Sprite();
+				this.addChild(this.test)
+			}
+			uniLib.DisplayUtils.removeAllChildren(this.test)
+
+			// console.log("this._hero.$getContentBounds();");
+			// var rec: egret.Rectangle = this._hero.$getContentBounds()
+			// var shp: egret.Shape = new egret.Shape();
+			// shp.graphics.beginFill(0xff0dd0, 0.5);
+			// shp.graphics.drawRect(rec.x, rec.y, rec.width, rec.height);
+			// shp.graphics.endFill();
+			// this.test.addChild(shp);
+			// console.log("this._hero.$getContentBounds();",rec.height);
 
 		}
-
-		public timerFunc(e: egret.TimerEvent) {
-			//this.dispatchEvent(this._heroOpenFireEvent);
-
+/**获取边界 */
+		public _getContentBounds(): egret.Rectangle {
+			var rec: egret.Rectangle = this._hero.$getContentBounds()
+			return rec
 		}
-		public timerComplete(e: egret.TimerEvent) {
 
-
-		}
 
 		public reset() {
 			this.x = 300;
@@ -85,13 +128,22 @@ module gameMain {
 		 * @param boo true为左
 		 */
 		public sestPosition(boo: boolean) {
+			// if (this._isStand) {
 			if (this.x < 0 || this.x > 720) return;
 			if (boo) {
-				this.x = this.x - 40;
+				this._direction = 1;
 			}
 			else {
-				this.x = this.x + 40;
+				this._direction = 0;
 			}
+			this._isRun = true
+			egret.clearTimeout(this.timeNum)
+			this.timeNum = egret.setTimeout(() => {
+				this._isRun = false;
+				this._direction = 2;
+			}, this, 500)
+
+
 		}
 
 		private destory() {

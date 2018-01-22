@@ -28,7 +28,7 @@ module gameMain {
 				this._enemys.push(p)
 			}
 			this._giveevent = new EnemyGiveEvent(EnemyGiveEvent.TAG);
-			this._timer = new egret.Timer(1000);
+			this._timer = new egret.Timer(2000);
 			this._timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this)
 			this._timer.start();
 			this.addEventListener(EnemyGiveEvent.TAG, (e: EnemyGiveEvent) => {
@@ -70,7 +70,7 @@ module gameMain {
 
 		}
 
-		public IsHit(e: egret.DisplayObjectContainer): boolean {
+		public IsHit(e: gameMain.HeroObject): boolean {
 
 			let arr = EnemyFactory.Init().GetIsUsePlane(); //1.从对象池中取出已经在使用的平台
 

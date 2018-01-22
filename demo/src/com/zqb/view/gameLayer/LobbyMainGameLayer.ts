@@ -166,7 +166,6 @@ module weChat {
         public HeroDie() {
             //Hero死亡,移除帧事件
             this.removeEventListener(egret.Event.ENTER_FRAME, () => { }, this)
-            this._Hero._timer.stop();
             if (this._Hero.parent) {
                 this.removeChild(this._Hero)
             }
