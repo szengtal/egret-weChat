@@ -17,17 +17,17 @@ module gameMain {
 			this.bgSpeed = 5;
 			var bg = RES.getRes("background_png");
 			this.bgbitmap1 = new egret.Bitmap(bg);
-			this.bgbitmap1.width = GameConfig.SceneW;
-			this.bgbitmap1.height = GameConfig.SceneH + 10;
+			this.bgbitmap1.width = weChat.GameManager.stageW;
+			this.bgbitmap1.height = weChat.GameManager.stageH+ 10;
 			this.addChild(this.bgbitmap1)
 			this.bgbitmap2 = new egret.Bitmap(bg);
-			this.bgbitmap2.width = GameConfig.SceneW;
-			this.bgbitmap2.height = GameConfig.SceneH;
+			this.bgbitmap2.width = weChat.GameManager.stageW;
+			this.bgbitmap2.height = weChat.GameManager.stageH;
 			this.addChild(this.bgbitmap2)
 			this.bgbitmap1.x = 0;
 			this.bgbitmap1.y = 0;
 			this.bgbitmap2.x = 0;
-			this.bgbitmap2.y = GameConfig.SceneH + 10;
+			this.bgbitmap2.y = weChat.GameManager.stageH + 10;
 			this.touchEnabled = true;
 			this.Run();
 
@@ -39,13 +39,13 @@ module gameMain {
 		public Run() {
 			this.addEventListener(egret.Event.ENTER_FRAME, () => {
 				this.bgbitmap1.y -= this.bgSpeed;
-				if (this.bgbitmap1.y < -GameConfig.SceneH) {
+				if (this.bgbitmap1.y < -weChat.GameManager.stageH) {
 					this.bgbitmap1.y = (0)
 
 				}
 				this.bgbitmap2.y -= this.bgSpeed;
 				if (this.bgbitmap2.y < 0) {
-					this.bgbitmap2.y = (0 + GameConfig.SceneH)
+					this.bgbitmap2.y = (0 + weChat.GameManager.stageH)
 
 				}
 

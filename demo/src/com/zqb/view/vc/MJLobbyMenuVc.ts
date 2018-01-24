@@ -30,9 +30,16 @@ module weChat {
 		protected addEvent() {
 			BC.addEvent(this, this.resetMan, egret.TouchEvent.TOUCH_TAP, this.resetManHandle);
 
-			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_TAP, this.leftHandle);
 
-			BC.addEvent(this, this._right, egret.TouchEvent.TOUCH_TAP, this.rightHandle);
+
+			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_BEGIN, this.leftHandle);
+			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_END, this.leftHandle);
+			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.leftHandle);
+
+			BC.addEvent(this, this._right, egret.TouchEvent.TOUCH_BEGIN, this.rightHandle);
+			BC.addEvent(this, this._right, egret.TouchEvent.TOUCH_END, this.rightHandle);
+			BC.addEvent(this, this._right, egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.rightHandle);
+			
 
 		}
 
@@ -47,13 +54,13 @@ module weChat {
 
 		}
 
-		private leftHandle() {
-			weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.TURN_LEFT, null);
+		private leftHandle(evt: egret.TouchEvent) {
+			weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.TURN_LEFT, evt);
 
 		}
 
-		private rightHandle() {
-			weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.TURN_RIGHT, null);
+		private rightHandle(evt: egret.TouchEvent) {
+			weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.TURN_RIGHT, evt);
 
 		}
 
