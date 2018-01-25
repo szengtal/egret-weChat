@@ -153,13 +153,8 @@ module weChat {
 		    weChat.variableCommon.getInstance().LobbyTempMap.clear()
 		}
 		private static getContainer(): egret.DisplayObjectContainer {
-			if (MJLobbyInfo.topLayer) {
-				return MJLobbyInfo.topLayer;
-			}
-			if (uniLib.SceneMgr.instance.currentScene && uniLib.SceneMgr.instance.currentScene.tipsLayer) {
-				return uniLib.SceneMgr.instance.currentScene.tipsLayer;
-			}
-			return uniLib.SceneMgr.instance.currentScene
+			
+			return egret.MainContext.instance.stage
 		}
 		public static showConfirmPanel(msg: string, btnlables: Array<string>, backFn: Array<Function> = null, title: string = null, backObj: any, countdown: number = 0, needClose: boolean = false, size?: number, align: string = egret.HorizontalAlign.CENTER): void {
 			var _msgTips: LobbyMsgBox = new LobbyMsgBox(needClose);

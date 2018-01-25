@@ -12,7 +12,6 @@ module weChat {
         }
 
         public destory(): void {
-            variableCommon.getInstance().destoryPopPanel();
             uniLib.DisplayUtils.removeAllChildren(this);
             uniLib.DisplayUtils.removeFromParent(this);
             this.removeEvent();

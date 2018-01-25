@@ -37,13 +37,11 @@ class Main extends egret.DisplayObjectContainer {
     private version: string;
     private bundleInfo: any;
     private _hasExit: boolean;
-    private _globalControl: weChat.GlobalControl;//全局控制类
 
     public constructor(params?: any) {
         super();
         // uniLib.Global.is_sandbox = 1;
         // weChat.ViewConfig.loginPanelName = uniLib.getQualifiedClassName(weChat.LobbyLoginPanel_new);
-        weChat.ViewConfig.mainMediatorName = uniLib.getQualifiedClassName(weChat.MahJongLobbyMediator);
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.start, this);
         RES.setMaxLoadingThread(4);
         egret.ImageLoader.crossOrigin = "anonymous";
@@ -76,7 +74,6 @@ class Main extends egret.DisplayObjectContainer {
         uniLib.UIMgr.instance.showLoadingTimeout(TJLoadingUI, "", 0);
         uniLib.UIMgr.instance.commonLoadUI = PublicLoadingView// ;
         uniLib.UIMgr.instance.tipsLoadUI = HaoCaiTipLoading;
-        this._globalControl = weChat.GlobalControl.getInstance();
     
         this.loadResConfig();
 
@@ -143,18 +140,13 @@ class Main extends egret.DisplayObjectContainer {
         // }
     }
     public preLoadEnd(): void {
-        // weChat.LobbyDataCache.langObj = JSON.parse(RES.getRes("szTxt_cn_txt"));
-        weChat.variableCommon.getInstance().playBgMusic();
+        // weChat.variableCommon.getInstance().playBgMusic();
         BC.removeEvent(this, egret.MainContext.instance.stage, egret.Event.ACTIVATE, this.onGameActivateHandler);
         BC.addEvent(this, egret.MainContext.instance.stage, egret.Event.ACTIVATE, this.onGameActivateHandler);
         // uniLib.UIMgr.instance.hideLoading(PublicLoadingView);
 
         uniLib.UIMgr.instance.hideLoading();
-
-        // if (uniLib.Global.isH5) {
-      
         this.showLogin();
-        // }
     }
 
  
@@ -193,7 +185,10 @@ class Main extends egret.DisplayObjectContainer {
      */
     private createGameScene(): void {
         			window["weChat"] = weChat;
-        uniLib.SceneMgr.instance.changeScene(weChat.MJLobbyScene);
+
+                    var gameScene = new weChat.MJLobbyScene();
+                    this.addChild(gameScene)
+        // uniLib.SceneMgr.instance.changeScene(weChat.MJLobbyScene);
         console.error("创建游戏场景");
 
     }

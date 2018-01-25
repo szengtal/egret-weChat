@@ -89,7 +89,7 @@ module weChat {
             this.addChild(bg)
 
             var layer = new newGameScene();
-            egret.MainContext.instance.stage.addChild(layer);
+            this.addChild(layer);
 
             //移除开始界面，然后加入其它的GameObject
             // this.removeChild(this.beginScene);

@@ -184,8 +184,8 @@ module weChat {
 
         private heroStay() {
             var heroBody = this.heroBody;
-
-            heroBody.position[1] = 12
+            heroBody.velocity[0] = 0
+            heroBody.position[1] = 14
             heroBody.position[0] = 5
         }
 

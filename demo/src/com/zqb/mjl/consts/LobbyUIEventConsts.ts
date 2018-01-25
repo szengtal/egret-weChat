@@ -1,6 +1,5 @@
 module weChat {
 	export class LobbyUIEventConsts extends egret.Event {
-		public data: EventData;
 		/**这部分是核心事件------------------------- */
 
 		/** 数据更改*/

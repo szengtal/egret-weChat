@@ -48,14 +48,6 @@ module weChat {
             return arr;
         }
 
-        /**
-         * 获取Mediator
-         * @param name
-         */
-        public static getMediatorByName(name: string): any {
-            var mediator: any = weChat.MahJongLobbyFacade.getLobbyInstance().retrieveMediator(name);
-            return mediator;
-        }
 
         /**
          * 分割字符串返回相应索引的值

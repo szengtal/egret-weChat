@@ -2,29 +2,25 @@ module weChat {
 	/**
 	 * 游戏场景
 	 */
-	export class MJLobbyScene extends uniLib.LobbyScene {
+	export class MJLobbyScene extends egret.DisplayObjectContainer {
 		public constructor() {
 			super();
+			this.start();
 		}
 		public start(e: egret.Event = null): void {
-			var a = new uniLib.LobbyScene();
-			this.addGame(a)
+			var a = new weChat.LobbyMainGameLayer();
+			this.addChild(a)
+			
+				var menu = new weChat.MJLobbyMenuVc();
+			this.addChild(menu)
 
-			MJLobbyInfo.uiLayer = this.uiLayer;
-			MJLobbyInfo.mainUILayer = this.uiLayer;
-			this.uiLayer.visible = true;
-			MJLobbyInfo.topLayer = this.topLayer;
-			MahJongLobbyFacade.getLobbyInstance().startUp(this);
-
-			this.scaleX = uniLib.Global.screenWidth / 1280;
-			// else
-			this.scaleY = uniLib.Global.screenHeight / 720;
+			// this.scaleX = uniLib.Global.screenWidth / 1280;
+			// // else
+			// this.scaleY = uniLib.Global.screenHeight / 720;
 			uniLib.UIMgr.instance.hideLoading(PublicLoadingView);
 
 		}
 		public destroy(): void {
-			super.destroy();
-			weChat.MahJongLobbyFacade.getLobbyInstance().sendNotification(weChat.MahJongLobbyFacadeConsts.DESTORY);
 		}
 	}
 }

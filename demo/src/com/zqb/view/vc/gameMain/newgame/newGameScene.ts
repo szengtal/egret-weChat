@@ -40,6 +40,9 @@ module weChat {
         private posArray: number[][] = [];// 坐标集合
         private lastPosy: number = 0;// 最后添加的台阶的坐标
 
+        private _debug = false
+        private debugDraw: p2DebugDraw;
+
         public constructor() {
 
             super();
@@ -51,14 +54,66 @@ module weChat {
 
             this.touchEnabled = true;
             this.setUI();
+
         }
 
+        private types: string[] = ["box", "circle", "capsule", "line", "particle"]
+        private addOneBox(e: egret.TouchEvent): void {
+            var positionX: number = Math.floor(e.stageX);
+            var positionY: number = Math.floor(e.stageY);
+            var shape: p2.Shape;
+            var body = new p2.Body({ mass: 1, position: [positionX, positionY], angularVelocity: 1 });
+
+            // var shapeType = this.types[Math.floor((Math.random() * this.types.length))];
+            var shapeType = this.types[1];
+
+            //shapeType = "particle";
+            switch (shapeType) {
+                case "box":
+                    //shape = new p2.Rectangle(Math.random() * 150 + 50, 100);
+                    shape = new p2.Box({ width: Math.random() * 150 + 50, height: 100 });
+                    break;
+                case "circle":
+                    //shape = new p2.Circle(50);
+                    shape = new p2.Circle({ radius: 50 });
+                    break;
+                case "capsule":
+                    //shape = new p2.Capsule(50, 10);
+                    shape = new p2.Capsule({ length: 50, radius: 10 });
+                    break;
+                case "line":
+                    //shape = new p2.Line(150);
+                    shape = new p2.Line({ length: 150 });
+                    break;
+                case "particle":
+                    shape = new p2.Particle();
+                    break;
+            }
+            body.addShape(shape);
+            this.world.addBody(body);
+        }
+
+
+        private createDebug(world: p2.World): void {
+            //创建调试试图
+            this.debugDraw = new p2DebugDraw(world);
+            var sprite: egret.Sprite = new egret.Sprite();
+            sprite.width = egret.MainContext.instance.stage.stageWidth
+            sprite.height = egret.MainContext.instance.stage.stageHeight
+
+            sprite.name = "debugDraw";
+            this.addChild(sprite);
+            this.debugDraw.setSprite(sprite);
+
+            // egret.MainContext.instance.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.addOneBox, this);
+
+        }
         private setUI(): void {
             var stageW: number = egret.MainContext.instance.stage.stageWidth;
             var stageH: number = egret.MainContext.instance.stage.stageHeight;
             this.stageH = stageH;
             this.stageW = stageW;
-         
+
 
             //  物理世界和真实世界的转换因子
             var factor: number = 50;
@@ -71,10 +126,12 @@ module weChat {
 
             this.lastPosy = -worldH;
             //  创建world
-            var world: p2.World = new p2.World();
+            this.world = new p2.World();
 
-            world.sleepMode = p2.World.BODY_SLEEPING;
-            world.gravity = [0, this.gravity];
+
+
+            this.world.sleepMode = p2.World.BODY_SLEEPING;
+            // this.world.gravity = [0, this.gravity];
             ////  创建地板
             ////  下
             //var land = new p2.Body();
@@ -120,21 +177,44 @@ module weChat {
 
             //  添加英雄刚体
             var hero = new Hero();
-            var heroShape = new p2.Circle(hero.height * 0.35 / factor);
+            var heroShape = new p2.Circle({ radius: hero.height * 0.45 / factor });
             heroShape.material = new p2.Material(1);
             var heroBody = new p2.Body({
-                mass: 1,
+                mass: 2,
                 position: [stageW * 0.5 / factor, stageH * 0.5 / factor],
                 type: p2.Body.DYNAMIC,   //DYNAMIC 为接收碰撞  KINEMATIC 为不接收碰撞
-                fixedRotation: true
+                fixedRotation: true,
+                inertia: 0,
+                dadamping:1000,
+                rerestitution:1000
+                
             });
             heroBody.addShape(heroShape);
             heroBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
             heroBody.damping = 0;//  限行阻尼。取值区间[0,1]
             heroBody.allowSleep = false;//  禁止休眠
             heroBody.velocity = [0, this.jumpSpeed];//  y方向的速度
-            world.addBody(heroBody);
-            heroBody.displays = [hero];
+            this.world.addBody(heroBody);
+
+            if (this._isDebug) {
+                var displayHero = this.createBall((<p2.Circle>heroShape).radius * factor);
+                displayHero.width = (<p2.Circle>heroShape).radius * 2 * factor;
+                displayHero.height = (<p2.Circle>heroShape).radius * 2 * factor;
+                displayHero.anchorOffsetX = displayHero.width / 2;
+                displayHero.anchorOffsetY = displayHero.height / 2;
+                heroBody.displays = [displayHero];
+                this.addChild(displayHero);
+
+            } else {
+                heroBody.displays = [hero];
+
+            }
+
+
+
+
+
+
             //  将主角添加到屏幕上
             this.addChild(hero);
 
@@ -150,13 +230,22 @@ module weChat {
             this.hero = hero;
             this.heroBody = heroBody;
             this.heroShape = heroShape;
-            this.world = world;
+            this.world = this.world;
             this.spritePool = new SpritePool();
 
             // 初始游戏操作层
             this.gameHud = new GameHud(this);
             this.addChild(this.gameHud);
 
+            this.createDebug(this.world);
+
+
+
+            // var leftTimer = new egret.Timer(500, 0);
+            // leftTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+            //     this.debugDraw.drawDebug();
+            // }, this);
+            // leftTimer.start();
             //  随机添加一批台阶
             this.addSidesteps(-1);
             this.addSidesteps(0);
@@ -171,7 +260,7 @@ module weChat {
             var breakableFloor = this.breakableFloor;
 
             // 碰撞开始函数
-            world.on("beginContact", function (evt) {
+            this.world.on("beginContact", function (evt) {
                 //  两个都不是英雄则返回
                 if (evt.bodyA != heroBody && evt.bodyB != heroBody) {
                     return;
@@ -186,9 +275,11 @@ module weChat {
 
 
             //  碰撞结束。
-            world.on("endContact", function (evt) {
+            this.world.on("endContact", function (evt) {
                 curFloor = null;
-
+                if (1) {
+                    return
+                }
                 // 踩到破碎台阶后的逻辑
                 var breakableIndex = breakableFloor.indexOf(evt.bodyA);
                 if (breakableIndex == -1) {
@@ -209,7 +300,7 @@ module weChat {
                         }, this, 100
                         );
                     }, this);
-                    world.removeBody(breakableFloor.splice(breakableIndex, 1)[0]);
+                    this.world.removeBody(breakableFloor.splice(breakableIndex, 1)[0]);
                 }
 
 
@@ -217,14 +308,14 @@ module weChat {
 
 
             //  世界运行逻辑
-            world.on("postStep", function () {
+            this.world.on("postStep", function () {
                 //因为world.removeBody()函数在这里执行不成功，所以将相关逻辑都放在Ticker函数中了
 
                 var hero = this.hero;
                 var heroBody = this.heroBody;
                 var heroShape = this.heroShape;
                 var radius = (<p2.Circle>heroShape).radius;
-
+                // console.error("radius",radius);
 
                 heroBody.gravityScale = 1;
 
@@ -232,64 +323,38 @@ module weChat {
                 if (heroBody.velocity[1] < this.gravity) {
                     heroBody.velocity[1] = 1.5 * this.gravity;
                 }
-
+                if (1) {
+                  //  return
+                }
                 //  如果英雄超出屏幕左边，则从右边出现，如果超出右边，则从左边出现
                 if (heroBody.position[0] + radius <= 0) {
-                    heroBody.position[0] = worldW - radius;
+                    heroBody.velocity[0] = 0;
+                                heroBody.position[0] = radius 
+
                 } else if (heroBody.position[0] - radius >= worldW) {
-                    heroBody.position[0] = radius;
+                    heroBody.velocity[0] = 0;
+                    heroBody.position[0] = worldW-radius 
                 }
 
                 // 当英雄上升时，位置高于屏幕7/10时，不再上升
                 if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 0.7) {
                     heroBody.position[1] = worldH * 0.7;
                 }
-// console.error("heroBody.position[1]",heroBody.position[1]);
+                // console.error("heroBody.position[1]",heroBody.position[1]);
 
 
 
-                // // 当英雄下落时且位置不低于屏幕1/10，其他物体停止下移
-                // if(heroBody.velocity[1] <= 0 && heroBody.position[1] > worldH*0.1){
-                //     var l = world.bodies.length;
-                //     for (var i:number = 0; i < l; i++) {
-                //         var boxBody = world.bodies[i];
-                //         if (boxBody != heroBody ) {
-                //             if(boxBody.velocity[1] < 0){
-                //                 boxBody.velocity[1] = 0;
-                //             }
 
-                //         }
-                //     }
-                // }
 
-                // 英雄下落时，位置低于屏幕1/10时，不再下降，其他物体上移  
-                // if (heroBody.velocity[1] < 0 && heroBody.position[1] <= worldH * 0.1) {
-                //     heroBody.position[1] = worldH * 0.1;
-                //     var l = world.bodies.length;
-                //     for (var i: number = 0; i < l; i++) {
-                //         var boxBody = world.bodies[i];
-                //         if (boxBody != heroBody) {
-                //             boxBody.velocity[1] = this.gameSpeed;
-                //         }
-                //     }
-                // }
+                // 英雄下落时，位置低于屏幕1/10时，不再下降
+                if (heroBody.position[1] <= worldH * 0.1) {
+                    heroBody.position[1] = worldH * 0.7;
+                }
 
-                // // 当英雄下落时且位置低于屏幕7/10，其他物体停止下移
-                // if(heroBody.velocity[1] >= 0 && heroBody.position[1] < worldH*0.7){
-                //     var l = world.bodies.length;
-                //     for (var i:number = 0; i < l; i++) {
-                //         var boxBody = world.bodies[i];
-                //         if (boxBody != heroBody) {
-                //             if(boxBody.velocity[1] > 0){
-                //                 boxBody.velocity[1] = 0;
-                //             }
 
-                //         }
-                //     }
-                // }
-                var l = world.bodies.length;
+                var l = this.world.bodies.length;
                 for (var i: number = 0; i < l; i++) {
-                    var boxBody = world.bodies[i];
+                    var boxBody = this.world.bodies[i];
                     if (boxBody != heroBody) {
                         boxBody.velocity[1] = this.gameSpeed;
                     }
@@ -340,11 +405,15 @@ module weChat {
                 var y = this.lastPosy + 3.5//Math.floor(Math.random()*3 + this.lastPosy);
                 //console.log("y: " + y);
                 this.lastPosy = y;
-             
+
                 this.posArray.push([x, y]);
-                   if(this.lastPosy > 2){
+                if (this.lastPosy > 0) {
                     break;
                 }
+                //  if (this.posArray.length > 1) {
+                //     break;
+                // }
+
             }
             // console.error(" this.posArray", this.posArray, "count", count);
             // debugger;
@@ -368,8 +437,7 @@ module weChat {
                     }
                     //添加方形刚体
                     var display = spritePool.getObject(1);
-                    boxShape = new p2.Line();
-                    boxShape.length = floorLength
+                    boxShape = new p2.Box({ width: 3.5, height: 1 });
                     boxShape.material = boxMaterial;
                     boxBody = new p2.Body({
                         mass: 0,
@@ -381,8 +449,18 @@ module weChat {
                     boxBody.type = p2.Body.KINEMATIC;
                     world.addBody(boxBody);
                     this.stableFloor.push(boxBody);
-                    boxBody.displays = [display];
-                    this.addChild(display);
+                    if (this._isDebug) {
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
+                        display2.anchorOffsetX = display2.width / 2;
+                        display2.anchorOffsetY = display2.height / 2;
+                        boxBody.displays = [display2];
+                        this.addChild(display2);
+
+                    } else {
+                        boxBody.displays = [display];
+                        this.addChild(display);
+
+                    }
                 }
             }
 
@@ -391,11 +469,13 @@ module weChat {
                 for (var i = 0; i < ran2; i++) {
                     //添加方形刚体
                     var display = spritePool.getObject(2);
-                    boxShape = new p2.Line();
-                    boxShape.length = floorLength
+                    // boxShape = new p2.Line();
+                    // boxShape.length = floorLength
+                    boxShape = new p2.Box({ width: 3.5, height: 1 });
+
                     boxShape.material = boxMaterial;
                     boxBody = new p2.Body({
-                        mass: 0,
+                        mass: 1,
                         //position: this.posArray.pop()
                         position: this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0]
                     });
@@ -405,8 +485,19 @@ module weChat {
                     boxBody.type = p2.Body.KINEMATIC;
                     world.addBody(boxBody);
                     this.breakableFloor.push(boxBody);
-                    boxBody.displays = [display];
-                    this.addChild(display);
+                    if (this._isDebug) {
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
+                          display2.anchorOffsetX = display2.width / 2;
+                        display2.anchorOffsetY = display2.height / 2;
+                        boxBody.displays = [display2];
+                        this.addChild(display2);
+
+
+                    } else {
+                        boxBody.displays = [display];
+                        this.addChild(display);
+
+                    }
 
                 }
             }
@@ -416,8 +507,10 @@ module weChat {
                 for (var i = 0; i < ran3; i++) {
                     //添加方形刚体
                     var display = spritePool.getObject(3);
-                    boxShape = new p2.Line();
-                    boxShape.length = floorLength
+                    // boxShape = new p2.Line();
+                    // boxShape.length = floorLength
+                    boxShape = new p2.Box({ width: 3.5, height: 1 });
+
                     boxShape.material = boxMaterial;
                     boxBody = new p2.Body({
                         mass: 0,
@@ -432,8 +525,19 @@ module weChat {
                     boxBody.velocity = [Math.floor(Math.random() * this.floatFloorSpeedX + 1), 0];
                     world.addBody(boxBody);
                     this.floatFloor.push(boxBody);
-                    boxBody.displays = [display];
-                    this.addChild(display);
+                    if (this._isDebug) {
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
+                          display2.anchorOffsetX = display2.width / 2;
+                        display2.anchorOffsetY = display2.height / 2;
+                        boxBody.displays = [display2];
+                        this.addChild(display2);
+
+
+                    } else {
+                        boxBody.displays = [display];
+                        this.addChild(display);
+
+                    }
                 }
             }
 
@@ -442,8 +546,9 @@ module weChat {
             // 添加英雄和台阶的碰撞材料
             var boxHeroCM = new p2.ContactMaterial(boxMaterial, heroShape.material);
             boxHeroCM.surfaceVelocity = 0;
-            boxHeroCM.friction = 0;
-            // boxHeroCM.stiffness = Number.MAX_VALUE;
+            boxHeroCM.friction = 0.5;
+            boxHeroCM.restitution = 0
+            boxHeroCM.stiffness = Number.MAX_VALUE;
             world.addContactMaterial(boxHeroCM);
 
             // 添加英雄和道具的碰撞材料
@@ -481,6 +586,7 @@ module weChat {
             if (this.getChildIndex(this.hero) < this.numChildren - 2) {
                 this.setChildIndex(this.hero, this.numChildren - 2);
             }
+            // this.debugDraw.drawDebug();
 
             //  更新游戏操作层的深度值，使其一直处于屏幕最外层
             if (this.getChildIndex(this.gameHud) < this.numChildren - 1) {
@@ -502,18 +608,21 @@ module weChat {
                     }
                 }
                 //  更新精灵显示
-                var box = boxBody.displays[0];
-                if (box) {
-                    box.x = boxBody.position[0] * factor;
-                    box.y = stageH - boxBody.position[1] * factor;
-                    box.rotation = 360 - boxBody.angle * 180 / Math.PI;
-                    if (boxBody.sleepState == p2.Body.SLEEPING) {
-                        box.alpha = 0.5;
-                    }
-                    else {
-                        box.alpha = 1;
+                if (boxBody.displays) {
+                    var box = boxBody.displays[0];
+                    if (box) {
+                        box.x = boxBody.position[0] * factor;
+                        box.y = stageH - boxBody.position[1] * factor;
+                        box.rotation = 360 - boxBody.angle * 180 / Math.PI;
+                        if (boxBody.sleepState == p2.Body.SLEEPING) {
+                            box.alpha = 0.5;
+                        }
+                        else {
+                            box.alpha = 1;
+                        }
                     }
                 }
+
             }
             //游戏结束跳转
             if (gameover) {
@@ -523,7 +632,6 @@ module weChat {
                 // }
             }
 
-            // 保存分数
 
             // 是否创建新的台阶，当所有的台阶位置都低于屏幕的高度时才重新创建
             var newFloor = true;
@@ -539,7 +647,7 @@ module weChat {
                 }
 
                 //只要有一个的位置还在屏幕下等待显示，就不添加，这里稍微比0大点
-                if (floatFloor[i].position[1] < 1) {
+                if (floatFloor[i].position[1] < 4) {
                     newFloor = false;
                 }
                 //  位置高于1个屏幕高度时移除
@@ -554,7 +662,7 @@ module weChat {
             }
             for (var i = 0; i < stableFloor.length; i++) {
                 //只要有一个的位置还在屏幕下等待显示，就不添加
-                if (stableFloor[i].position[1] < 0) {
+                if (stableFloor[i].position[1] < 2) {
                     newFloor = false;
                 }
                 //  位置高于1个屏幕高度时移除
@@ -567,7 +675,7 @@ module weChat {
 
             for (var i = 0; i < breakableFloor.length; i++) {
                 //只要有一个的位置还在屏幕下等待显示，就不添加，这里稍微比0大点
-                if (breakableFloor[i].position[1] < 0) {
+                if (breakableFloor[i].position[1] < 3) {
                     newFloor = false;
                 }
                 //  位置高于一个屏幕高度时移除
@@ -580,12 +688,35 @@ module weChat {
             //  在屏幕下方方1个屏幕大小区域创建备用台阶
             if (newFloor) {
                 this.lastPosy = -worldH;
-                console.log("在屏幕上方1个屏幕大小区域创建备用台阶: ",worldH);
+                console.log("在屏幕上方1个屏幕大小区域创建备用台阶: ", worldH);
                 this.addSidesteps(1);
             }
 
 
         }
+        /**
+ * 创建一个方形
+ */
+        private createBox(width: number, height: number): egret.Shape {
+            var shape = new egret.Shape();
+            shape.graphics.beginFill(0xfff000);
+            shape.graphics.drawRect(0, 0, width, height);
+            shape.graphics.endFill();
+            return shape;
+        }
+
+        /**
+  * 创建一个圆形
+  */
+        private createBall(r: number): egret.Shape {
+            var shape = new egret.Shape();
+            shape.graphics.beginFill(0xfff000);
+            shape.graphics.drawCircle(r, r, r);
+            shape.graphics.endFill();
+            return shape;
+        }
 
     }
+
+
 }

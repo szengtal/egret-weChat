@@ -12,15 +12,6 @@ module weChat {
         public LobbyPopMap: Map<string, any>;
         /**用于管理所有二级弹出面板的顺序,目前用于监听手机返回键的事件 */
         public LobbyPopArray: Array<any>;
-        /**游戏签到数据 */
-        public signData: weChat.LobbyTaskConfig[];
-        /**游戏商品数据 */
-        public goodData: weChat.TableGoodsConfig[];
-        /**游戏人数数据 */
-        /**用于管理需要显示红点的按钮 */
-        public redPointBtnMap: Map<any, eui.Button>;
-        /**用于管理需要显示红点的数据 */
-        public redPointData: any;
         public _popLayer: LobbyPopLayer;
         /**用于储存临时数据 */
         public LobbyTempMap: Map<string, any>;
@@ -41,8 +32,6 @@ module weChat {
             this.LobbyPopMap = new Map();
             this.LobbyTempMap = new Map();
             this.LobbyPopArray = [];
-            this.redPointBtnMap = new Map();
-            Object.freeze(this.goodData)
             this._popLayer = new LobbyPopLayer;
         }
         /**统一销毁所有的二级弹出面板 */
@@ -63,28 +52,7 @@ module weChat {
             _this[key]()
         }
 
-        /**手机返回键控制 */
-        public destroyPanelByAndroid() {
-            if (variableCommon.getInstance().LobbyPopArray.length > 0) {
-                let obj = variableCommon.getInstance().LobbyPopArray.pop();
-                let fun = obj["fun"]
-                try {
-                    obj["_this"][fun]();
-                    return true;
-                }
-                catch (e) {
-                    console.error("catch(e)手机返回键控制", e);
-                }
-            }
-            else {
-                console.error("当前已经没有弹出面板了");
-                if (uniLib.Global.isInGame) {
-                    return false;
-                }
-            }
-
-        }
-
+   
 
 
         public removeOne(funName: any, _this: any) {
@@ -109,13 +77,6 @@ module weChat {
             // uniLib.ZQGameSdk.hideVk();
         }
 
-        public playBgMusic() {
-         
-            if (uniLib.SoundMgr.instance.musicVolume != 0) {
-           //     uniLib.SoundMgr.instance.playBgMusic(["bg2_mp3"]);
-            }
-
-        }
 
         public playButtonSound(){
              if (RES.hasRes("buttonClick_mp3")) {
@@ -123,12 +84,7 @@ module weChat {
             }
         }
 
-        public removeRedPoint() {
-            weChat.variableCommon.getInstance().redPointBtnMap.forEach(C => {
-                C.skin["redPoint"].visible = false;
-            });
-            weChat.variableCommon.getInstance().redPointData = [];
-        }
+     
 
         public testCae(str: string = "(101)test<1>gfrg<2>rggs<3>gr<4>") {
            var _loadingMc1 = weChat.LobbyResUtil.createMovieClicp("sz_Lobby_Loading", "loadingMc1");
