@@ -97,6 +97,7 @@
 		"bin-debug/com/zqb/view/vc/MJLobbyVc.js",
 		"bin-debug/com/zqb/view/vc/gameMain/BgContent.js",
 		"bin-debug/com/zqb/view/vc/gameMain/HeroObject.js",
+		"bin-debug/com/zqb/view/vc/gameMain/p2DebugDraw.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/FailedLayer.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/GameHud.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/GameManager.js",
