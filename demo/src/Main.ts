@@ -32,7 +32,7 @@ class Main extends egret.DisplayObjectContainer {
      * 加载进度界面
      * Process interface loading
      */
-    private loadingView: MJLobbyLoadingUI;
+    private loadingView: LoadingUI;
     private bundleId: string;
     private version: string;
     private bundleInfo: any;

@@ -241,11 +241,11 @@ module weChat {
 
 
 
-            // var leftTimer = new egret.Timer(500, 0);
-            // leftTimer.addEventListener(egret.TimerEvent.TIMER, () => {
-            //     this.debugDraw.drawDebug();
-            // }, this);
-            // leftTimer.start();
+            var leftTimer = new egret.Timer(500, 0);
+            leftTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+                // this.debugDraw.drawDebug();
+            }, this);
+            leftTimer.start();
             //  随机添加一批台阶
             this.addSidesteps(-1);
             this.addSidesteps(0);
@@ -457,6 +457,8 @@ module weChat {
                         this.addChild(display2);
 
                     } else {
+                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
 
@@ -494,6 +496,8 @@ module weChat {
 
 
                     } else {
+                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
 
@@ -534,6 +538,8 @@ module weChat {
 
 
                     } else {
+                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
 
@@ -548,7 +554,7 @@ module weChat {
             boxHeroCM.surfaceVelocity = 0;
             boxHeroCM.friction = 0.5;
             boxHeroCM.restitution = 0
-            boxHeroCM.stiffness = Number.MAX_VALUE;
+            // boxHeroCM.stiffness = Number.MAX_VALUE;
             world.addContactMaterial(boxHeroCM);
 
             // 添加英雄和道具的碰撞材料
@@ -582,6 +588,8 @@ module weChat {
             }
             //  世界执行
             world.step(dt / 1000);
+                this.debugDraw.drawDebug();
+            
             //  更新英雄的深度值，使其一直处于屏幕最外层
             if (this.getChildIndex(this.hero) < this.numChildren - 2) {
                 this.setChildIndex(this.hero, this.numChildren - 2);

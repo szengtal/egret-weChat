@@ -59,15 +59,14 @@ class p2DebugDraw {
 
                 
                 if (shape instanceof p2.Convex) {
-        console.error("--Convex.--");
 
                     this.drawConvex(<p2.Convex>shape, body);
                 } else if (shape instanceof p2.Circle) {
-        console.error("--Circle.--");
+        // console.error("--Circle.--");
                     
                     this.drawCircle(<p2.Circle>shape, body);
                 } else if (shape instanceof p2.Line) {
-        console.error("--Line.--");
+        // console.error("--Line.--");
                     
                     this.drawLine(<p2.Line>shape, body);
                 } else if (shape instanceof p2.Particle) {
@@ -82,7 +81,7 @@ class p2DebugDraw {
     }
     private drawCircle(shape: p2.Circle, b: p2.Body): void {
         var color: number = this.getColor(b);
-        console.error("--tdrawCircle--",b);
+        // console.error("--tdrawCircle--",b);
 
         var g: egret.Graphics = this.sprite.graphics;
         g.lineStyle(1, color);
