@@ -25,6 +25,11 @@ module weChat {
             this.addChild(sprite);
             this.sprite = sprite;
 
+               var display2 = this.createBox(sprite.width , sprite.height);
+                        display2.anchorOffsetX = display2.width / 2;
+                        display2.anchorOffsetY = display2.height / 2;
+                        // this.addChild(display2);
+
         }
 
         public changeTexture(change: boolean) {
@@ -34,6 +39,20 @@ module weChat {
                 this.sprite.texture = RES.getRes("line1_png");
             }
 
+        }
+
+                private createBox(width: number, height: number): egret.Sprite {
+            var contain = new egret.Sprite();
+            var shape = new egret.Shape();
+            shape.graphics.beginFill(0xfff000);
+            shape.graphics.drawRect(0, 0, width, height);
+            shape.graphics.endFill();
+
+         
+            
+            contain.addChild(shape)
+
+            return contain;
         }
     }
 }

@@ -17,6 +17,7 @@ module weChat {
         public sprite: egret.Bitmap;
         public mcDataFactory: egret.MovieClipDataFactory;
         public _hero: egret.MovieClip;
+        public stateArr = []
 
         public constructor() {
             super();
@@ -45,18 +46,16 @@ module weChat {
             this._hero = weChat.LobbyResUtil.createMovieClicp("jumpMc", "stand");
             this._hero.play(-1);
             this.addChild(this._hero);
-
+            this.stateArr = [];
+            this.stateArr.push(this._standData)
+            this.stateArr.push(this._runData)
+            this.stateArr.push(this._flyData)
 
             //每秒计时一次
-            this.rundTimer = new egret.Timer(500, 0);
+            this.rundTimer = new egret.Timer(1000, 0);
             this.rundTimer.addEventListener(egret.TimerEvent.TIMER, this.changeNormal, this);
 
         }
-
-
-
-
-
 
 
 
@@ -96,6 +95,11 @@ module weChat {
                 this.rundTimer.reset();
                 this.changeNormal();
             }
+        }
+        /**状态控制  站立=0；跑=1；飞=2 */
+        public stateHandle(state: number) {
+            this._hero.movieClipData = this.stateArr[state]
+            this._hero.play(-1);
         }
 
 

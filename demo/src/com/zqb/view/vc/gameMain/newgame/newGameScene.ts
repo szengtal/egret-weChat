@@ -15,12 +15,12 @@ module weChat {
         private floatFloorSpeedX: number = 6;// 浮动台阶左右移动的最大速度
         private gravity: number = -10;// 重力，物体下落速度
         private jumpSpeed: number = 1;// 英雄的跳跃速度
-        private gameSpeed: number = 4;// 台子上升的速度
+        private gameSpeed: number = 3;// 台子上升的速度
 
-        private stableFloor_MAX: number = 5;// 屏幕中最大的坚固台阶个数
-        private stableFloor_min: number = 2;// 屏幕中最小的坚固台阶个数
+        private stableFloor_MAX: number = 6;// 屏幕中最大的坚固台阶个数
+        private stableFloor_min: number = 3;// 屏幕中最小的坚固台阶个数
         private breakableFloor_MAX: number = 2;// 屏幕中最大的易碎台阶个数
-        private floatFloor_MAX: number = 3;// 屏幕中最大的浮动台阶个数
+        private floatFloor_MAX: number = 2;// 屏幕中最大的浮动台阶个数
 
         private stageW: number;
         private stageH: number;
@@ -32,6 +32,8 @@ module weChat {
         public world: p2.World;// 世界
         private heroShape: p2.Shape;// 主角形状
         public heroBody: p2.Body;// 主角
+        public heroBody1: p2.Body;// 主角
+
         private floatFloor: p2.Body[] = [];// 浮动的台阶刚体集合
         private stableFloor: p2.Body[] = [];// 坚固的台阶刚体集合
         private breakableFloor: p2.Body[] = [];// 易碎的台阶刚体集合
@@ -56,43 +58,6 @@ module weChat {
             this.setUI();
 
         }
-
-        private types: string[] = ["box", "circle", "capsule", "line", "particle"]
-        private addOneBox(e: egret.TouchEvent): void {
-            var positionX: number = Math.floor(e.stageX);
-            var positionY: number = Math.floor(e.stageY);
-            var shape: p2.Shape;
-            var body = new p2.Body({ mass: 1, position: [positionX, positionY], angularVelocity: 1 });
-
-            // var shapeType = this.types[Math.floor((Math.random() * this.types.length))];
-            var shapeType = this.types[1];
-
-            //shapeType = "particle";
-            switch (shapeType) {
-                case "box":
-                    //shape = new p2.Rectangle(Math.random() * 150 + 50, 100);
-                    shape = new p2.Box({ width: Math.random() * 150 + 50, height: 100 });
-                    break;
-                case "circle":
-                    //shape = new p2.Circle(50);
-                    shape = new p2.Circle({ radius: 50 });
-                    break;
-                case "capsule":
-                    //shape = new p2.Capsule(50, 10);
-                    shape = new p2.Capsule({ length: 50, radius: 10 });
-                    break;
-                case "line":
-                    //shape = new p2.Line(150);
-                    shape = new p2.Line({ length: 150 });
-                    break;
-                case "particle":
-                    shape = new p2.Particle();
-                    break;
-            }
-            body.addShape(shape);
-            this.world.addBody(body);
-        }
-
 
         private createDebug(world: p2.World): void {
             //创建调试试图
@@ -127,7 +92,7 @@ module weChat {
             this.lastPosy = -worldH;
             //  创建world
             this.world = new p2.World();
-
+            this.world.emitImpactEvent = false;
 
 
             this.world.sleepMode = p2.World.BODY_SLEEPING;
@@ -177,17 +142,17 @@ module weChat {
 
             //  添加英雄刚体
             var hero = new Hero();
-            var heroShape = new p2.Circle({ radius: hero.height * 0.45 / factor });
+            var heroShape = new p2.Circle({ radius: hero.height * 0.35 / factor });
             heroShape.material = new p2.Material(1);
             var heroBody = new p2.Body({
-                mass: 2,
+                mass: 1,
                 position: [stageW * 0.5 / factor, stageH * 0.5 / factor],
                 type: p2.Body.DYNAMIC,   //DYNAMIC 为接收碰撞  KINEMATIC 为不接收碰撞
                 fixedRotation: true,
-                inertia: 0,
-                dadamping:1000,
-                rerestitution:1000
-                
+                inertia: 1,
+                dadamping: 1000,
+                rerestitution: 1000,
+
             });
             heroBody.addShape(heroShape);
             heroBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
@@ -197,21 +162,25 @@ module weChat {
             this.world.addBody(heroBody);
 
             if (this._isDebug) {
+
+
+
+
                 var displayHero = this.createBall((<p2.Circle>heroShape).radius * factor);
                 displayHero.width = (<p2.Circle>heroShape).radius * 2 * factor;
                 displayHero.height = (<p2.Circle>heroShape).radius * 2 * factor;
                 displayHero.anchorOffsetX = displayHero.width / 2;
                 displayHero.anchorOffsetY = displayHero.height / 2;
-                heroBody.displays = [displayHero];
-                this.addChild(displayHero);
+                // heroBody.displays = [displayHero];
+                // this.addChild(displayHero);
+
+                heroBody.displays = [hero];
+
 
             } else {
                 heroBody.displays = [hero];
 
             }
-
-
-
 
 
 
@@ -228,7 +197,10 @@ module weChat {
 
 
             this.hero = hero;
+            weChat.variableCommon.getInstance().hero = this.hero
+            
             this.heroBody = heroBody;
+            // this.heroBody1 = heroBody1;
             this.heroShape = heroShape;
             this.world = this.world;
             this.spritePool = new SpritePool();
@@ -262,6 +234,8 @@ module weChat {
             // 碰撞开始函数
             this.world.on("beginContact", function (evt) {
                 //  两个都不是英雄则返回
+                console.error("碰撞开始函数");
+
                 if (evt.bodyA != heroBody && evt.bodyB != heroBody) {
                     return;
                 }
@@ -324,20 +298,25 @@ module weChat {
                     heroBody.velocity[1] = 1.5 * this.gravity;
                 }
                 if (1) {
-                  //  return
+                    //  return
                 }
                 //  如果英雄超出屏幕左边，则从右边出现，如果超出右边，则从左边出现
                 if (heroBody.position[0] + radius <= 0) {
                     heroBody.velocity[0] = 0;
-                                heroBody.position[0] = radius 
+                    heroBody.position[0] = radius
 
                 } else if (heroBody.position[0] - radius >= worldW) {
                     heroBody.velocity[0] = 0;
-                    heroBody.position[0] = worldW-radius 
+                    heroBody.position[0] = worldW - radius
                 }
 
+                if( heroBody.velocity[0]>8){
+                     heroBody.velocity[0] =8
+                }
+// console.error("heroBody.velocity[0]",heroBody.velocity[0]);
+
                 // 当英雄上升时，位置高于屏幕7/10时，不再上升
-                if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 0.7) {
+                if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 1) {
                     heroBody.position[1] = worldH * 0.7;
                 }
                 // console.error("heroBody.position[1]",heroBody.position[1]);
@@ -402,20 +381,24 @@ module weChat {
                 } else if (x - floorLength / 2 <= 0) {
                     x = floorLength / 2;
                 }
-                var y = this.lastPosy + 3.5//Math.floor(Math.random()*3 + this.lastPosy);
+                var y = this.lastPosy + 4.5//Math.floor(Math.random()*3 + this.lastPosy);
                 //console.log("y: " + y);
                 this.lastPosy = y;
-
+                console.error("随机添加台阶", this.lastPosy);
                 this.posArray.push([x, y]);
                 if (this.lastPosy > 0) {
                     break;
                 }
-                //  if (this.posArray.length > 1) {
-                //     break;
-                // }
 
             }
-            // console.error(" this.posArray", this.posArray, "count", count);
+
+            ran1 = Math.floor((ran1 / count) * this.posArray.length)
+            ran2 = Math.floor((ran2 / count) * this.posArray.length)
+            ran3 = this.posArray.length - ran1 - ran2;
+            console.error(" this.posArray", this.posArray, "count", count);
+
+            console.error(" ran1", ran1, "ran2", ran2, "ran3", ran3);
+
             // debugger;
             var boxShape;
             var boxBody;
@@ -423,17 +406,18 @@ module weChat {
             var boxMaterial = new p2.Material(0);
             var proMaterial = new p2.Material(2);
 
-            // 随机一个敌人坐标点备用
-            var enemyPos;
-            var enemyPosIndex = Math.floor(Math.random() * ran1);
             //  添加砖块1
             if (ran1 > 0) {
                 for (var i = 0; i < ran1; i++) {
                     //保存敌人坐标
                     //var pos1 = this.posArray.pop();
-                    var pos1 = this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0];
-                    if (enemyPosIndex == i) {
-                        enemyPos = pos1;
+                    let pos1 = this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0];
+                    // console.error("保存敌人坐标",pos1);
+                    if (this.posArray.length == 0) {
+                        break;
+                    }
+                    if (pos1[0] == 0 && pos1[1] == 0) {
+                        continue
                     }
                     //添加方形刚体
                     var display = spritePool.getObject(1);
@@ -443,6 +427,8 @@ module weChat {
                         mass: 0,
                         position: pos1
                     });
+                    // console.error("添加砖块1", boxBody.position);
+
                     boxBody.addShape(boxShape);
                     boxBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
                     boxBody.damping = 0;//  限行阻尼。取值区间[0,1]
@@ -450,14 +436,35 @@ module weChat {
                     world.addBody(boxBody);
                     this.stableFloor.push(boxBody);
                     if (this._isDebug) {
-                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
+
+                        var boxShape1 = new p2.Box({ width: 3.5, height: 1 });
+                        boxShape1.material = boxMaterial;
+                        var boxBody1 = new p2.Body({
+                            mass: 0,
+                            position: pos1
+                        });
+                        // console.error("添加砖块1", boxBody.position);
+
+                        boxBody1.addShape(boxShape1);
+                        boxBody1.angularDamping = 0;//  角阻尼。取值区间[0,1]
+                        boxBody1.damping = 0;//  限行阻尼。取值区间[0,1]
+                        boxBody1.type = p2.Body.KINEMATIC;
+                        world.addBody(boxBody1);
+
+
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor, boxBody.position[1]);
                         display2.anchorOffsetX = display2.width / 2;
                         display2.anchorOffsetY = display2.height / 2;
-                        boxBody.displays = [display2];
+                        boxBody1.displays = [display2];
                         this.addChild(display2);
 
+                        display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetY = display.height / 2;
+                        boxBody.displays = [display];
+                        this.addChild(display);
+
                     } else {
-                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetX = display.width / 2;
                         display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
@@ -474,13 +481,25 @@ module weChat {
                     // boxShape = new p2.Line();
                     // boxShape.length = floorLength
                     boxShape = new p2.Box({ width: 3.5, height: 1 });
+                    // console.error("保存敌人坐标22this.posArray",this.posArray);
+                    if (this.posArray.length == 0) {
+                        break;
+                    }
+                    let pos1 = this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0];
+                    // console.error("保存敌人坐标22",pos1);
+
+                    if (pos1[0] == 0 && pos1[1] == 0) {
+                        continue
+                    }
 
                     boxShape.material = boxMaterial;
                     boxBody = new p2.Body({
                         mass: 1,
                         //position: this.posArray.pop()
-                        position: this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0]
+                        position: pos1
                     });
+                    // console.error("添加砖块2", boxBody.position);
+
                     boxBody.addShape(boxShape);
                     boxBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
                     boxBody.damping = 0;//  限行阻尼。取值区间[0,1]
@@ -488,15 +507,15 @@ module weChat {
                     world.addBody(boxBody);
                     this.breakableFloor.push(boxBody);
                     if (this._isDebug) {
-                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
-                          display2.anchorOffsetX = display2.width / 2;
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor, boxBody.position[1]);
+                        display2.anchorOffsetX = display2.width / 2;
                         display2.anchorOffsetY = display2.height / 2;
                         boxBody.displays = [display2];
                         this.addChild(display2);
 
 
                     } else {
-                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetX = display.width / 2;
                         display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
@@ -514,13 +533,24 @@ module weChat {
                     // boxShape = new p2.Line();
                     // boxShape.length = floorLength
                     boxShape = new p2.Box({ width: 3.5, height: 1 });
+                    if (this.posArray.length == 0) {
+                        break;
+                    }
+                    let pos1 = this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0];
+                    // console.error("添加砖块3pos1", pos1);
 
+                    if (pos1[0] == 0 && pos1[1] == 0) {
+                        continue
+                    }
                     boxShape.material = boxMaterial;
                     boxBody = new p2.Body({
                         mass: 0,
                         //position: this.posArray.pop()
-                        position: this.posArray.splice(Math.floor(Math.random() * this.posArray.length), 1)[0]
+                        position: pos1
                     });
+                    // console.error("添加砖块3", boxBody.position);
+
+
                     boxBody.addShape(boxShape);
                     boxBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
                     boxBody.damping = 0;//  限行阻尼。取值区间[0,1]
@@ -530,15 +560,15 @@ module weChat {
                     world.addBody(boxBody);
                     this.floatFloor.push(boxBody);
                     if (this._isDebug) {
-                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor);
-                          display2.anchorOffsetX = display2.width / 2;
+                        var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor, boxBody.position[1]);
+                        display2.anchorOffsetX = display2.width / 2;
                         display2.anchorOffsetY = display2.height / 2;
                         boxBody.displays = [display2];
                         this.addChild(display2);
 
 
                     } else {
-                          display.anchorOffsetX = display.width / 2;
+                        display.anchorOffsetX = display.width / 2;
                         display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
@@ -588,8 +618,8 @@ module weChat {
             }
             //  世界执行
             world.step(dt / 1000);
-                this.debugDraw.drawDebug();
-            
+            // this.debugDraw.drawDebug();
+
             //  更新英雄的深度值，使其一直处于屏幕最外层
             if (this.getChildIndex(this.hero) < this.numChildren - 2) {
                 this.setChildIndex(this.hero, this.numChildren - 2);
@@ -655,7 +685,7 @@ module weChat {
                 }
 
                 //只要有一个的位置还在屏幕下等待显示，就不添加，这里稍微比0大点
-                if (floatFloor[i].position[1] < 4) {
+                if (floatFloor[i].position[1] < 3) {
                     newFloor = false;
                 }
                 //  位置高于1个屏幕高度时移除
@@ -670,7 +700,7 @@ module weChat {
             }
             for (var i = 0; i < stableFloor.length; i++) {
                 //只要有一个的位置还在屏幕下等待显示，就不添加
-                if (stableFloor[i].position[1] < 2) {
+                if (stableFloor[i].position[1] < 0) {
                     newFloor = false;
                 }
                 //  位置高于1个屏幕高度时移除
@@ -705,12 +735,21 @@ module weChat {
         /**
  * 创建一个方形
  */
-        private createBox(width: number, height: number): egret.Shape {
+        private createBox(width: number, height: number, testY: number): egret.Sprite {
+            var contain = new egret.Sprite();
             var shape = new egret.Shape();
             shape.graphics.beginFill(0xfff000);
             shape.graphics.drawRect(0, 0, width, height);
             shape.graphics.endFill();
-            return shape;
+
+            var text = new egret.TextField()
+            text.text = ("" + testY).substring(0, 6)
+            text.x = 70
+
+            contain.addChild(shape)
+            contain.addChild(text)
+
+            return contain;
         }
 
         /**

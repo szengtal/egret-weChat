@@ -13,8 +13,10 @@ module weChat {
         /**用于管理所有二级弹出面板的顺序,目前用于监听手机返回键的事件 */
         public LobbyPopArray: Array<any>;
         public _popLayer: LobbyPopLayer;
-        /**用于储存临时数据 */
+        /**用于储存楼梯位置数据 */
         public LobbyTempMap: Map<string, any>;
+ /**储存英雄引用 */
+        public hero: Hero;
 
            /**缩放 */
         public sclaeNum: number = uniLib.Global.screenHeight / 720;
@@ -94,6 +96,10 @@ module weChat {
         egret.MainContext.instance.stage.addChild(_loadingMc1)
 
         }
+/**分配数组 */
+        public handleArray1(){
+
+        }
 
 
 
@@ -106,22 +112,4 @@ module weChat {
 
 
 
-
-    /**KEY值为目前游戏二级面板所存的索引*/
-    export enum PopMap {
-        "help" = 1, //游戏帮助面板
-        "noble" = 2, //游戏贵族礼包
-        "freegold" = 3, //免费金币
-        "notice" = 5, //公告
-        "noticeDetail" = 6, //公告详情
-        "rank" = 7, //排行榜
-        "market" = 8, //商城
-    }
-    /**红点对应的按钮KEY值以及服务器发来的索引值 ,目前不会作为使用的作用*/
-    export enum RedPoint_Button {
-        "goldTree" = 701,        //顶部菜单->摇钱树
-        "freeGold" = 5,      //底部菜单->免费金币
-        "notice" = 600,        //底部菜单->公告
-
-    }
 }

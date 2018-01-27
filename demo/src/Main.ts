@@ -176,7 +176,7 @@ class Main extends egret.DisplayObjectContainer {
      */
     private onResourceProgress(event: RES.ResourceEvent): void {
         if (event.groupName == "sz_preload") {
-            this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
+            this.loadingView.onProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
     /**

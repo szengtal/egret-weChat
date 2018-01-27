@@ -13,12 +13,15 @@ module weChat {
         private rightTimer: egret.Timer;
         private heroStayTimer: egret.Timer;//英雄停留计时器
         private timeBarTimer: egret.Timer;//进度条计时器
+        private heroState: egret.Timer;//英雄状态计时器
+
         private stayTime: number = 0;
         private preScore: number = 0;
         private curScore: number = 0;
 
         private hero: Hero;
         private heroBody: p2.Body;
+        private heroBody1: p2.Body;
 
         public constructor(gameScene: newGameScene) {
 
@@ -34,6 +37,7 @@ module weChat {
 
             this.hero = gameScene.hero;
             this.heroBody = gameScene.heroBody;
+            this.heroBody1 = gameScene.heroBody1;
 
             this.setUI();
             this.addevent();
@@ -114,6 +118,10 @@ module weChat {
             this.rightTimer = new egret.Timer(1000 / 60, 0);
             this.rightTimer.addEventListener(egret.TimerEvent.TIMER, this.rightMove, this);
 
+            this.heroState = new egret.Timer(1000 / 60, 0);
+            this.heroState.addEventListener(egret.TimerEvent.TIMER, this.heroStateHandle, this);
+            this.heroState.start();
+
         }
 
         public updateScore(score: number) {
@@ -129,14 +137,23 @@ module weChat {
             if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
                 //console.log("touch begin");
                 this.leftTimer.start();
-
+                weChat.variableCommon.getInstance().hero.stateHandle(1)
+                this.heroState.stop();
             }
             else if (evt.type == egret.TouchEvent.TOUCH_END) {
                 //console.log("touch ended");
+                this.heroBody.velocity[0] = 1;
+                
                 this.leftTimer.reset();
+                this.heroState.start();
+
             }
             else if (evt.type == egret.TouchEvent.TOUCH_RELEASE_OUTSIDE) {
                 //console.log("touch cancel");
+                this.heroBody.velocity[0] = 1;
+                
+                this.heroState.start();
+
             }
 
         }
@@ -146,16 +163,20 @@ module weChat {
 
             if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
                 //console.log("touch begin");
-
+                weChat.variableCommon.getInstance().hero.stateHandle(1)
+                this.heroState.stop();
                 this.rightTimer.start();
             } else if (evt.type == egret.TouchEvent.TOUCH_END) {
                 //console.log("touch ended");
                 //  水平速度归零
-                //heroBody.velocity[0] = 1;
+                this.heroBody.velocity[0] = 1;
                 this.rightTimer.reset();
-
+                this.heroState.start();
             } else if (evt.type == egret.TouchEvent.TOUCH_RELEASE_OUTSIDE) {
                 //console.log("touch cancel");
+                this.heroState.start();
+                this.heroBody.velocity[0] = 1;
+
                 evt.currentTarget.scaleX = 1.0;
                 evt.currentTarget.scaleY = 1.0;
             }
@@ -187,6 +208,23 @@ module weChat {
             heroBody.velocity[0] = 0
             heroBody.position[1] = 14
             heroBody.position[0] = 5
+
+            //    var heroBody1 = this.heroBody1;
+            // heroBody1.velocity[0] = 0
+            // heroBody1.position[1] = 14
+            // heroBody1.position[0] = 5
+        }
+
+        private heroStateHandle() {
+            var heroBody = this.heroBody;
+            /**当大于0说明在上升 站立*/
+            if (heroBody.velocity[1] > 0) {
+                weChat.variableCommon.getInstance().hero.stateHandle(0)
+            }
+            else if (heroBody.velocity[1] <= 0) {
+                weChat.variableCommon.getInstance().hero.stateHandle(2)
+
+            }
         }
 
         private timeBarCallback() {
