@@ -68,6 +68,7 @@
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/FailedLayer.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/GameHud.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/GameManager.js",
+		"bin-debug/com/zqb/view/vc/gameMain/newgame/gameOver.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/Hero.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/newGameScene.js",
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/Prop.js",

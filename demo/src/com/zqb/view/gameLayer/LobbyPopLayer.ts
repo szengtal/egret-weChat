@@ -5,6 +5,8 @@ module weChat {
         // private _chatPanel: chesscommonlib.LobbyChatPanel;
         /**帮助面板 */
         private _helpPanel: LobbyHelpPanel;
+        /**重新开始面板 */
+        private _gameOver: gameOver;
     
         constructor() {
             super();
@@ -39,6 +41,9 @@ module weChat {
                 case LobbyUIEventConsts.LOBBY_SHOW_HELP:
                     this.showHelpPanel();
                     break;
+                 case LobbyUIEventConsts.SHOW_RESTART_PANEL:
+                    this.showGameOverPanel();
+                    break;
             }
 
         }
@@ -64,6 +69,25 @@ module weChat {
                 LobbyPopupManager.removePopUp("closeHelp", this._helpPanel, true);
                 this._helpPanel.destory();
                 this._helpPanel = null;
+            }
+        }
+
+             /**重新开始面板 */
+        private showGameOverPanel() {
+            if (!this._gameOver) {
+                this._gameOver = new gameOver();
+                this._gameOver.name = "gameOver";
+                BC.addEvent(this, this._gameOver, LobbyUIEventConsts.CLOSE, this.closeGameOver);
+                LobbyPopupManager.addPopUp(["closeGameOver", this], this._gameOver, true, true, true, 1280, 720);
+            }
+        }
+        /**重新开始面板移除 */
+        private closeGameOver() {
+            if (this._gameOver) {
+                BC.removeEvent(this, this._gameOver);
+                LobbyPopupManager.removePopUp("closeGameOver", this._gameOver, true);
+                this._gameOver.destory();
+                this._gameOver = null;
             }
         }
 

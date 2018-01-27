@@ -20,7 +20,7 @@ module weChat {
         private stableFloor_MAX: number = 6;// 屏幕中最大的坚固台阶个数
         private stableFloor_min: number = 3;// 屏幕中最小的坚固台阶个数
         private breakableFloor_MAX: number = 2;// 屏幕中最大的易碎台阶个数
-        private floatFloor_MAX: number = 2;// 屏幕中最大的浮动台阶个数
+        private floatFloor_MAX: number = 4;// 屏幕中最大的浮动台阶个数
 
         private stageW: number;
         private stageH: number;
@@ -41,6 +41,7 @@ module weChat {
         private propDisplays: Prop[] = [];// 道具的显示精灵
         private posArray: number[][] = [];// 坐标集合
         private lastPosy: number = 0;// 最后添加的台阶的坐标
+        private egretContain: egret.DisplayObject;//添加egret场景组件
 
         private _debug = false
         private debugDraw: p2DebugDraw;
@@ -71,6 +72,12 @@ module weChat {
             this.debugDraw.setSprite(sprite);
 
             // egret.MainContext.instance.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.addOneBox, this);
+
+        }
+        /**添加egret场景组件 */
+        private initView() {
+            this.egretContain = new egret.DisplayObject();
+            // this.addChild()
 
         }
         private setUI(): void {
@@ -121,6 +128,7 @@ module weChat {
             //  心跳函数
             egret.Ticker.getInstance().register(this.worldLogic, this);
 
+
             //鼠标点击移动
             //this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, click, this);
             //function click(e:egret.TouchEvent):void {
@@ -150,8 +158,8 @@ module weChat {
                 type: p2.Body.DYNAMIC,   //DYNAMIC 为接收碰撞  KINEMATIC 为不接收碰撞
                 fixedRotation: true,
                 inertia: 1,
-                dadamping: 1000,
-                rerestitution: 1000,
+                dadamping: -1000,
+                rerestitution: -1000,
 
             });
             heroBody.addShape(heroShape);
@@ -162,10 +170,6 @@ module weChat {
             this.world.addBody(heroBody);
 
             if (this._isDebug) {
-
-
-
-
                 var displayHero = this.createBall((<p2.Circle>heroShape).radius * factor);
                 displayHero.width = (<p2.Circle>heroShape).radius * 2 * factor;
                 displayHero.height = (<p2.Circle>heroShape).radius * 2 * factor;
@@ -183,7 +187,6 @@ module weChat {
             }
 
 
-
             //  将主角添加到屏幕上
             this.addChild(hero);
 
@@ -198,7 +201,7 @@ module weChat {
 
             this.hero = hero;
             weChat.variableCommon.getInstance().hero = this.hero
-            
+
             this.heroBody = heroBody;
             // this.heroBody1 = heroBody1;
             this.heroShape = heroShape;
@@ -219,9 +222,9 @@ module weChat {
             }, this);
             leftTimer.start();
             //  随机添加一批台阶
-            this.addSidesteps(-1);
-            this.addSidesteps(0);
-            this.addSidesteps(1);
+            this.addSidesteps(-1, true);
+            this.addSidesteps(0, true);
+            this.addSidesteps(1, true);
 
             // 允许从下穿透台阶
             var curFloor = this.curFloor;
@@ -251,9 +254,7 @@ module weChat {
             //  碰撞结束。
             this.world.on("endContact", function (evt) {
                 curFloor = null;
-                if (1) {
-                    return
-                }
+                if (1) return;
                 // 踩到破碎台阶后的逻辑
                 var breakableIndex = breakableFloor.indexOf(evt.bodyA);
                 if (breakableIndex == -1) {
@@ -276,7 +277,6 @@ module weChat {
                     }, this);
                     this.world.removeBody(breakableFloor.splice(breakableIndex, 1)[0]);
                 }
-
 
             }, this);
 
@@ -309,15 +309,15 @@ module weChat {
                     heroBody.velocity[0] = 0;
                     heroBody.position[0] = worldW - radius
                 }
-
-                if( heroBody.velocity[0]>8){
-                     heroBody.velocity[0] =8
+                //限制左右最大速度
+                if (heroBody.velocity[0] > 8) {
+                    heroBody.velocity[0] = 8
                 }
-// console.error("heroBody.velocity[0]",heroBody.velocity[0]);
+                // console.error("heroBody.velocity[0]", heroBody.velocity[0]);
 
                 // 当英雄上升时，位置高于屏幕7/10时，不再上升
                 if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 1) {
-                    heroBody.position[1] = worldH * 0.7;
+                 this.stopWorld();
                 }
                 // console.error("heroBody.position[1]",heroBody.position[1]);
 
@@ -327,7 +327,8 @@ module weChat {
 
                 // 英雄下落时，位置低于屏幕1/10时，不再下降
                 if (heroBody.position[1] <= worldH * 0.1) {
-                    heroBody.position[1] = worldH * 0.7;
+                    // heroBody.position[1] = worldH * 0.7;
+                 this.stopWorld();
                 }
 
 
@@ -349,8 +350,15 @@ module weChat {
 
         /* 随机添加台阶
          * @num: 0：代表在当前屏幕的区域，1：代表当前屏幕上方的隐藏的一个屏幕大小的区域，2：代表1之上的另外一个隐藏区域。。。。。。
+         * @param init初始化添加
          */
-        private addSidesteps(dis: number) {
+        private addSidesteps(dis: number, init: boolean) {
+            if (init) {
+                weChat.variableCommon.getInstance().pilesNum = 1
+            }
+            else {
+                weChat.variableCommon.getInstance().pilesNum = weChat.variableCommon.getInstance().pilesNum + 1;
+            }
 
             var world = this.world;
             var heroShape = this.heroShape;
@@ -437,25 +445,25 @@ module weChat {
                     this.stableFloor.push(boxBody);
                     if (this._isDebug) {
 
-                        var boxShape1 = new p2.Box({ width: 3.5, height: 1 });
-                        boxShape1.material = boxMaterial;
-                        var boxBody1 = new p2.Body({
-                            mass: 0,
-                            position: pos1
-                        });
-                        // console.error("添加砖块1", boxBody.position);
+                        // var boxShape1 = new p2.Box({ width: 3.5, height: 1 });
+                        // boxShape1.material = boxMaterial;
+                        // var boxBody1 = new p2.Body({
+                        //     mass: 0,
+                        //     position: pos1
+                        // });
+                        // // console.error("添加砖块1", boxBody.position);
 
-                        boxBody1.addShape(boxShape1);
-                        boxBody1.angularDamping = 0;//  角阻尼。取值区间[0,1]
-                        boxBody1.damping = 0;//  限行阻尼。取值区间[0,1]
-                        boxBody1.type = p2.Body.KINEMATIC;
-                        world.addBody(boxBody1);
+                        // boxBody1.addShape(boxShape1);
+                        // boxBody1.angularDamping = 0;//  角阻尼。取值区间[0,1]
+                        // boxBody1.damping = 0;//  限行阻尼。取值区间[0,1]
+                        // boxBody1.type = p2.Body.KINEMATIC;
+                        // world.addBody(boxBody1);
 
 
                         var display2 = this.createBox((<p2.Box>boxShape).width * factor, (<p2.Box>boxShape).height * factor, boxBody.position[1]);
                         display2.anchorOffsetX = display2.width / 2;
                         display2.anchorOffsetY = display2.height / 2;
-                        boxBody1.displays = [display2];
+                        boxBody.displays = [display2];
                         this.addChild(display2);
 
                         display.anchorOffsetX = display.width / 2;
@@ -673,7 +681,7 @@ module weChat {
 
             // 是否创建新的台阶，当所有的台阶位置都低于屏幕的高度时才重新创建
             var newFloor = true;
-            var length = (<p2.Line>(stableFloor[0].shapes[0])).length / 2;
+            var length = (<p2.Box>(stableFloor[0].shapes[0])).width / 2;
             for (var i = 0; i < floatFloor.length; i++) {
                 //  浮动台阶左右循环移动
                 if (floatFloor[i].position[0] + length > worldW) {
@@ -727,10 +735,20 @@ module weChat {
             if (newFloor) {
                 this.lastPosy = -worldH;
                 console.log("在屏幕上方1个屏幕大小区域创建备用台阶: ", worldH);
-                this.addSidesteps(1);
+                this.addSidesteps(1, false);
             }
 
 
+        }
+        private stopWorld(){
+   egret.Ticker.getInstance().unregister(this.worldLogic, this)
+                    // this.hero.changeDied();
+                    // this.world.clear()
+                    weChat.variableCommon.getInstance().showReStartPanel();
+        }
+
+        public reStart() {
+            egret.Ticker.getInstance().register(this.worldLogic, this)
         }
         /**
  * 创建一个方形

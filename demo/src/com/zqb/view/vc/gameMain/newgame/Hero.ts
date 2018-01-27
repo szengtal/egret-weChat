@@ -45,6 +45,7 @@ module weChat {
 
             this._hero = weChat.LobbyResUtil.createMovieClicp("jumpMc", "stand");
             this._hero.play(-1);
+            this._hero.scaleX = this._hero.scaleY = 0.7
             this.addChild(this._hero);
             this.stateArr = [];
             this.stateArr.push(this._standData)
@@ -61,15 +62,15 @@ module weChat {
 
         //变形为死亡状态
         public changeDied() {
-            if (this.getChildIndex(this._hero) != -1) {
-                this.removeChild(this._hero);
-            }
-            if (this.getChildIndex(this.sprite) == -1) {
-                this.addChild(this.sprite);
-            }
-            this.sprite.texture = RES.getRes("ball4_png");
-            this.anchorOffsetX = this.sprite.width / 2;
-            this.anchorOffsetY = this.sprite.height / 2;
+            // if (this.getChildIndex(this._hero) != -1) {
+            //     this.removeChild(this._hero);
+            // }
+            // if (this.getChildIndex(this.sprite) == -1) {
+            //     this.addChild(this.sprite);
+            // }
+            // this.sprite.texture = RES.getRes("ball4_png");
+            // this.anchorOffsetX = this.sprite.width / 2;
+            // this.anchorOffsetY = this.sprite.height / 2;
 
         }
 

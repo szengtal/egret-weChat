@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="gameOverSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*">
+    <e:Image id="ItemBg" source="midwindow_jpg" y="383.5" x="110" />
+    <weChat:BaseButton id="backToMain" name="backToMain" x="9.06" y="11">
+        <weChat:skinName>
+            <e:Skin states="up,down,disabled">
+                <e:Image source="backHome_png" source.down="backHome_png" source.disabled="" width="120" height="120" />
+            </e:Skin>
+        </weChat:skinName>
+    </weChat:BaseButton>
+
+
+    <e:Label text="是否重玩？" x="276.33" y="543" textColor="0x0f0e0e" fontFamily="KaiTi" size="42" />
+
+
+    <weChat:BaseButton id="yesBtn" name="backToMain" x="276.33" y="625.17">
+        <weChat:skinName>
+            <e:Skin states="up,down,disabled">
+                <e:Label text="是" x="0" y="0" textColor="0x0f0e0e" fontFamily="KaiTi" size="42" />
+                </e:Skin>
+            </weChat:skinName>
+        </weChat:BaseButton>
+
+            <weChat:BaseButton id="noBtn" name="backToMain" x="381.33" y="625.17" anchorOffsetX="0" width="76.33" anchorOffsetY="0" height="54.33">
+        <weChat:skinName>
+            <e:Skin states="up,down,disabled">
+                <e:Label text="否" x="0" y="0" textColor="0x0f0e0e" fontFamily="KaiTi" size="42" />
+                </e:Skin>
+            </weChat:skinName>
+        </weChat:BaseButton>
+
+
+    </e:Skin>

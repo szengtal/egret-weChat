@@ -15,10 +15,12 @@ module weChat {
         public _popLayer: LobbyPopLayer;
         /**用于储存楼梯位置数据 */
         public LobbyTempMap: Map<string, any>;
- /**储存英雄引用 */
+        /**储存英雄引用 */
         public hero: Hero;
 
-           /**缩放 */
+        private _pilesNum: number = 0 //层数
+
+        /**缩放 */
         public sclaeNum: number = uniLib.Global.screenHeight / 720;
         public constructor() {
             this.init();
@@ -45,7 +47,6 @@ module weChat {
 
         }
 
-     
         /**移除制定面板 
          * @param {key}
         */
@@ -53,8 +54,6 @@ module weChat {
             let _this = this.LobbyPopMap.get(key);
             _this[key]()
         }
-
-   
 
 
         public removeOne(funName: any, _this: any) {
@@ -66,40 +65,45 @@ module weChat {
                     this.LobbyPopArray.splice(i, 1);
                     break;
                 }
-                if(item["fun"] == funName&&funName == "onMsgClose"){
-                     this.LobbyPopArray.splice(i, 1);
+                if (item["fun"] == funName && funName == "onMsgClose") {
+                    this.LobbyPopArray.splice(i, 1);
                     break;
                 }
             }
             // console.error("removeOne", this.LobbyPopArray);
 
         }
-        /**隐藏虚拟按键 */
-        public removeVirtual() {
-            // uniLib.ZQGameSdk.hideVk();
-        }
 
 
-        public playButtonSound(){
-             if (RES.hasRes("buttonClick_mp3")) {
+        public playButtonSound() {
+            if (RES.hasRes("buttonClick_mp3")) {
                 uniLib.SoundMgr.instance.playSound("buttonClick_mp3");
             }
         }
 
-     
+        public set pilesNum(num: number) {
+            this._pilesNum = num;
+            weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.PILES_CHANGE, null);
+        }
+        public get pilesNum(): number {
+            return this._pilesNum;
+        }
 
         public testCae(str: string = "(101)test<1>gfrg<2>rggs<3>gr<4>") {
-           var _loadingMc1 = weChat.LobbyResUtil.createMovieClicp("sz_Lobby_Loading", "loadingMc1");
-         _loadingMc1.x = (weChat.LobbyDataCache.defaultWidth) / 2-300;
-        _loadingMc1.y = (weChat.LobbyDataCache.defaultHeight) / 2 - 150;
-        _loadingMc1.play(-1);
-        egret.MainContext.instance.stage.addChild(_loadingMc1)
+            var _loadingMc1 = weChat.LobbyResUtil.createMovieClicp("sz_Lobby_Loading", "loadingMc1");
+            _loadingMc1.x = (weChat.LobbyDataCache.defaultWidth) / 2 - 300;
+            _loadingMc1.y = (weChat.LobbyDataCache.defaultHeight) / 2 - 150;
+            _loadingMc1.play(-1);
+            egret.MainContext.instance.stage.addChild(_loadingMc1)
 
         }
-/**分配数组 */
-        public handleArray1(){
 
+        public showReStartPanel(){
+            weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.SHOW_RESTART_PANEL, null);
+            
         }
+
+
 
 
 

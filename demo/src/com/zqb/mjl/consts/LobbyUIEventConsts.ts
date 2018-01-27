@@ -23,6 +23,12 @@ module weChat {
 
 		/**人物向右 */
 		public static TURN_RIGHT: string = "turn_right";
+		/**层数变化 */
+		public static PILES_CHANGE: string = "piles_change";
+		/**重新开始 */
+		public static RE_START: string = "re_start";
+			/**显示重玩面板 */
+		public static SHOW_RESTART_PANEL: string = "show_restart_panel";
 		/**通用确认 */
 		public static CONFIRM: string = "confirm";
 	}

@@ -9,7 +9,7 @@
 			"name": "sz_table"
 		},
 		{
-			"keys": "hero1_jpg,hero2_jpg,enemy2_png,background_png,help_png,backHome_png,sz_Lobby_Help_json,sz_Lobby_Scene_json,Lobbybg_jpg,sz_Lobby_market_fnt_fnt,loading_png,common_png,sz_Lobby_Helpstand_png,sz_Lobby_HelpHund_png,jumpMc_json,jumpMc_png",
+			"keys": "hero1_jpg,hero2_jpg,enemy2_png,background_png,help_png,backHome_png,sz_Lobby_Help_json,sz_Lobby_Scene_json,Lobbybg_jpg,sz_Lobby_market_fnt_fnt,loading_png,common_png,sz_Lobby_Helpstand_png,sz_Lobby_HelpHund_png,jumpMc_json,jumpMc_png,midwindow_jpg",
 			"name": "sz_assets"
 		},
 		{
@@ -172,6 +172,11 @@
 			"name": "jumpMc_png",
 			"type": "image",
 			"url": "assets/dragonMovie/jumpMc.png"
+		},
+		{
+			"name": "midwindow_jpg",
+			"type": "image",
+			"url": "assets/lobby/main/midwindow.jpg"
 		}
 	]
 }

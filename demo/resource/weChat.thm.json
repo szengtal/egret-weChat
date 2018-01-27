@@ -5,8 +5,7 @@
 		"resource/skins/LobbyMenu/LobbyMenuSkin.exml",
 		"resource/skins/LobbyMenuPanel/LobbyHelpPanelSkin.exml",
 		"resource/skins/LobbyScene/LobbyMainSceneSkin.exml",
-		"resource/skins/LobbyScene/LobbyStandardItemSkin.exml",
-		"resource/skins/LobbyScene/LobbyStandardSceneSkin.exml"
+		"resource/skins/LobbyScene/gameOverSkin.exml"
 	],
 	"path": "resource/weChat.thm.json"
 }

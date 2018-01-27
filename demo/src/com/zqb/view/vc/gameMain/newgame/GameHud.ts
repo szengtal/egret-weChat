@@ -6,6 +6,8 @@ module weChat {
         private stageW: number;
         private stageH: number;
         public scoreLabel: egret.TextField;
+        public pilesLabel: egret.TextField;//层数
+        
         private timeBarBg: egret.Bitmap;
         private timeBar: egret.Bitmap;
         private factor: number = 50;
@@ -19,6 +21,7 @@ module weChat {
         private preScore: number = 0;
         private curScore: number = 0;
 
+private gameScene:newGameScene
         private hero: Hero;
         private heroBody: p2.Body;
         private heroBody1: p2.Body;
@@ -26,6 +29,7 @@ module weChat {
         public constructor(gameScene: newGameScene) {
 
             super();
+            this.gameScene = gameScene
             this.init(gameScene);
 
         }
@@ -63,6 +67,12 @@ module weChat {
                 case LobbyUIEventConsts.TURN_RIGHT:
                     this.rightBtnCallback(rev);
                     break;
+                  case LobbyUIEventConsts.PILES_CHANGE:
+                    this.pilesHandle();
+                    break;
+                 case LobbyUIEventConsts.RE_START:
+                    this.reStart();
+                    break;
             }
 
         }
@@ -86,6 +96,20 @@ module weChat {
             scoreLabel.fontFamily = "Arial";
             scoreLabel.italic = true;
             this.scoreLabel = scoreLabel;
+
+              // 初始层数标签
+            var pilesLabel = new egret.TextField();
+            this.addChild(pilesLabel);
+            pilesLabel.anchorOffsetX = pilesLabel.width / 2;
+            pilesLabel.anchorOffsetY = pilesLabel.height / 2;
+            pilesLabel.x = stageW * 0.5;
+            pilesLabel.y = stageH * 0.05;
+            pilesLabel.size = 30;
+            pilesLabel.textAlign = "center";
+            pilesLabel.text = "0";
+            pilesLabel.textColor = 0xffffff;
+            pilesLabel.fontFamily = "Arial";
+            this.pilesLabel = pilesLabel;
 
             //  添加时间进度条
             //  底部
@@ -206,7 +230,7 @@ module weChat {
         private heroStay() {
             var heroBody = this.heroBody;
             heroBody.velocity[0] = 0
-            heroBody.position[1] = 14
+            heroBody.position[1] = egret.MainContext.instance.stage.stageHeight/50-2
             heroBody.position[0] = 5
 
             //    var heroBody1 = this.heroBody1;
@@ -249,6 +273,17 @@ module weChat {
             }
 
 
+        }
+
+
+        private pilesHandle(){
+            this.pilesLabel.text  ="第" +weChat.variableCommon.getInstance().pilesNum+"层";
+        }
+
+        private reStart(){
+            weChat.variableCommon.getInstance().pilesNum = 0;
+            this.gameScene.reStart();
+            this.heroStay();
         }
 
     }

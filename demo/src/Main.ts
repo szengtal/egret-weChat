@@ -229,7 +229,6 @@ class Main extends egret.DisplayObjectContainer {
 
     private onGameActivateHandler(evt: egret.Event): void {
         if (evt.type == egret.Event.ACTIVATE) {
-            weChat.variableCommon.getInstance().removeVirtual();
         }
         if (egret.ticker) {
             egret.ticker.resume();
@@ -237,6 +236,7 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     public destory(): void {
+        
     }
 
 }
