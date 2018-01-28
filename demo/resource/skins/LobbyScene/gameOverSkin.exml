@@ -13,6 +13,7 @@
 
     <e:Label text="是否重玩？" x="276.33" y="543" textColor="0x0f0e0e" fontFamily="KaiTi" size="42" />
 
+    <e:Label text="成绩是：第" id="grade" x="192" y="451" fontFamily="KaiTi" size="42"  textColor="0x262520" anchorOffsetY="0" height="73" anchorOffsetX="0" width="358" textAlign="center" verticalAlign="middle"/>
 
     <weChat:BaseButton id="yesBtn" name="backToMain" x="276.33" y="625.17">
         <weChat:skinName>

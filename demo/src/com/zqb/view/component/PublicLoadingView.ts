@@ -33,10 +33,11 @@ class PublicLoadingView extends egret.Sprite {
     //         this.scaleY = uniLib.Global.screenHeight /720;
         // alert("公共加载公共加载公共加载")
         if (!this.backgroud_bmp) {
-            this.backgroud_bmp = weChat.LobbyResUtil.createBitmapByName("Login_bg");
+            this.backgroud_bmp = weChat.LobbyResUtil.createBitmapByName("Login_bg_jpg");
             this.backgroud_bmp.width =weChat.LobbyDataCache.defaultWidth;
-            // this.backgroud_bmp.height = uniLib.Global.screenHeight ;
-            this.addChild(this.backgroud_bmp);
+            this.backgroud_bmp.height = egret.MainContext.instance.stage.stageHeight ;
+            egret.MainContext.instance.stage.addChild(this.backgroud_bmp)
+            // this.addChild(this.backgroud_bmp);
         }
         if (!this.darkLine_bmp) {
             this.darkLine_bmp = weChat.LobbyResUtil.createBitmapByName("Login_Progress_bg", 428, 491.5);
@@ -79,7 +80,6 @@ class PublicLoadingView extends egret.Sprite {
             this.explain_txf = weChat.LobbyResUtil.createTextFeild(0xf57e27, egret.HorizontalAlign.CENTER, "", 24, 490, uniLib.Global.screenHeight - (180 ), 246);
             this.addChild(this.explain_txf);
         }
-        
 
     }
 

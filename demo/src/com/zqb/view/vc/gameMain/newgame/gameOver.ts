@@ -7,6 +7,7 @@ module weChat {
         private backToMain: weChat.BaseButton;
         private yesBtn: weChat.BaseButton;
         private noBtn: weChat.BaseButton;
+        private grade: eui.Label
 
 
         constructor() {
@@ -20,6 +21,8 @@ module weChat {
             uniLib.DisplayUtils.removeFromParent(this);
 
         }
+
+
 
 
         protected addEvent() {
@@ -46,7 +49,7 @@ module weChat {
         }
 
         public initData() {
-
+            this.grade.text = "很遗憾你的成绩是第" + weChat.variableCommon.getInstance().pilesNum + "层";
         }
 
         /**全局事件监听类 */
