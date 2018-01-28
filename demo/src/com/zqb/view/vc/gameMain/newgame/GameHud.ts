@@ -187,7 +187,7 @@ private gameScene:newGameScene
 
             if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
                 //console.log("touch begin");
-                weChat.variableCommon.getInstance().hero.stateHandle(1)
+                weChat.variableCommon.getInstance().hero.stateHandle(2)
                 this.heroState.stop();
                 this.rightTimer.start();
             } else if (evt.type == egret.TouchEvent.TOUCH_END) {
@@ -246,7 +246,7 @@ private gameScene:newGameScene
                 weChat.variableCommon.getInstance().hero.stateHandle(0)
             }
             else if (heroBody.velocity[1] <= 0) {
-                weChat.variableCommon.getInstance().hero.stateHandle(2)
+                weChat.variableCommon.getInstance().hero.stateHandle(3)
 
             }
         }

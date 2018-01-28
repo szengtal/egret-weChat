@@ -50,6 +50,7 @@ module weChat {
             this.stateArr = [];
             this.stateArr.push(this._standData)
             this.stateArr.push(this._runData)
+            this.stateArr.push(this._runData)
             this.stateArr.push(this._flyData)
 
             //每秒计时一次
@@ -97,8 +98,15 @@ module weChat {
                 this.changeNormal();
             }
         }
-        /**状态控制  站立=0；跑=1；飞=2 */
+        /**状态控制  站立=0；左跑=1；右跑2；飞=3 */
         public stateHandle(state: number) {
+            if(state == 1){
+            this._hero.scaleX = -1;
+
+            }else{
+            this._hero.scaleX = 1;
+
+            }
             this._hero.movieClipData = this.stateArr[state]
             this._hero.play(-1);
         }
