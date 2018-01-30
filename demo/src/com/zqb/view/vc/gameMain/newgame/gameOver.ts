@@ -28,6 +28,7 @@ module weChat {
         protected addEvent() {
             BC.addEvent(this, this.yesBtn, egret.TouchEvent.TOUCH_TAP, this.start);
 
+            BC.addEvent(this, this.noBtn, egret.TouchEvent.TOUCH_TAP, this.noticeCloseHander);
 
             //  if (!weChatMsgCommand.instance.hasEventListener(LobbyUIEventConsts.DATA_CHANGE)) {
             // }
@@ -69,7 +70,10 @@ module weChat {
 
         }
 
-
+   /**关闭当前面板 */
+        private noticeCloseHander() {
+            this.dispatchEventWith(LobbyUIEventConsts.CLOSE);
+        }
 
 
 

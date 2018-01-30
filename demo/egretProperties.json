@@ -1,39 +1,38 @@
 {
-  "engineVersion": "5.1.2",
-  "compilerVersion": "5.1.2",
-  "template": {},
-  "target": {
-    "current": "wxgame"
-  },
-  "eui": {
-    "exmlRoot": [
-      "resource/"
-    ],
-    "themes": [
-      "resource/weChat.thm.json"
-    ],
-    "exmlPublishPolicy": "commonjs"
-  },
-  "modules": [
-    {
-      "name": "egret"
-    },
-    {
-      "name": "eui"
-    },
-	{
-      "name": "game"
-    },
-    {
-      "name": "assetsmanager"
-    },
-    {
-      "name": "tween"
-    },
+	"engineVersion": "5.1.5",
+	"compilerVersion": "5.1.5",
+	"template": {},
+	"target": {
+		"current": "wxgame"
+	},
+	"eui": {
+		"exmlRoot": [
+			"resource/"
+		],
+		"themes": [
+			"resource/weChat.thm.json"
+		],
+		"exmlPublishPolicy": "commonjs"
+	},
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "eui"
+		},
+		{
+			"name": "game"
+		},
+		{
+			"name": "assetsmanager"
+		},
+		{
+			"name": "tween"
+		},
 		{
 			"name": "dragonbones"
 		},
-	
 		{
 			"name": "physics",
 			"path": "../libsrc"
@@ -42,9 +41,8 @@
 			"name": "pureMvc",
 			"path": "../pureMvc"
 		},
-    {
-      "name": "promise"
-    }
-    
-  ]
+		{
+			"name": "promise"
+		}
+	]
 }

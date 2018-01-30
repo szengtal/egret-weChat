@@ -29,6 +29,8 @@ module weChat {
 		public static RE_START: string = "re_start";
 			/**显示重玩面板 */
 		public static SHOW_RESTART_PANEL: string = "show_restart_panel";
+				/**显示排行 */
+		public static SHOW_RANK: string = "show_rank";
 		/**通用确认 */
 		public static CONFIRM: string = "confirm";
 	}

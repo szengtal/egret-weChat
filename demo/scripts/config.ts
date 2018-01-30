@@ -1,9 +1,11 @@
+import { WxgamePlugin } from './wxgame/wxgame'
 /// 阅读 api.d.ts 查看文档
 ///<reference path="api.d.ts"/>
 
-import * as path from 'path';
-import { UglifyPlugin, IncrementCompilePlugin, CompilePlugin, ManifestPlugin, ExmlPlugin, EmitResConfigFilePlugin, TextureMergerPlugin } from 'built-in';
-import { WxgamePlugin } from './wxgame/wxgame';
+
+import { UglifyPlugin, IncrementCompilePlugin, CompilePlugin, ManifestPlugin, ExmlPlugin } from 'built-in';
+
+
 import { CustomPlugin } from './myplugin';
 
 const config: ResourceManagerConfig = {
@@ -14,70 +16,40 @@ const config: ResourceManagerConfig = {
 
     buildConfig: (params) => {
 
+        const target = params.target;
+        const command = params.command;
+        const projectName = params.projectName;
+        const version = params.version;
 
-
-        const { target, command, projectName, version } = params;
-
-        if (target == 'wxgame') {
-            const outputDir = `../${projectName}_wxgame`;
-            return {
-                outputDir,
-                commands: [
-                    new CompilePlugin({ libraryType: "release" }),
-                    new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
-                    new WxgamePlugin(),
-                    new UglifyPlugin([{
-                        sources: ["main.js"],
-                        target: "main.min.js"
-                    }
-                    ]),
-                    new ManifestPlugin({ output: 'manifest.js' })
-                ]
-            }
-        }
-
-
-        if (target == 'bricks') {
-            const outputDir = `../${projectName}_bricks/PublicBrickEngineGame/Res`;
-            return {
-                outputDir,
-                commands: [
-                    new CompilePlugin({ libraryType: "debug" }),
-                    new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
-                    new ManifestPlugin({ output: 'manifest.json' })
-                ]
-            }
-        }
-
-        if (command == 'build') {
+        if (params.command == 'build') {
             const outputDir = '.';
             return {
                 outputDir,
                 commands: [
-                    // new EmitResConfigFilePlugin({
-                    //     output: "resource/default.res.json",
-                    //     typeSelector: config.typeSelector,
-                    //     nameSelector: p => path.basename(p).replace(/\./gi, "_"),
-                    //     groupSelector: p => "preload"
-                    // }),
-                    new ExmlPlugin('debug'), // 非 EUI 项目关闭此设置
+                    new ExmlPlugin('debug'),
                     new IncrementCompilePlugin(),
                 ]
             }
         }
-        else if (command == 'publish') {
-            const outputDir = `bin-release/web/${version}`;
+        else if (params.command == 'publish') {
+            const outputDir = target == "web" ? `bin-release/${version}` : `../${projectName}_${target}`;
             return {
                 outputDir,
                 commands: [
                     new CustomPlugin(),
                     new CompilePlugin({ libraryType: "release" }),
-                    new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
-                    new UglifyPlugin([{
-                        sources: ["main.js"],
-                        target: "main.min.js"
-                    }]),
-                    new ManifestPlugin({ output: "manifest.json", hash: "crc32" })
+                    new ExmlPlugin('commonjs'),
+                    new WxgamePlugin(),
+                    new UglifyPlugin([
+                        {
+                            sources: ['resource/szLobby.thm.js'],
+                            target: "szLobby.thm.min.js"
+                        },
+                        {
+                            sources: ["main.js"],
+                            target: "main.min.js"
+                        }]),
+                    new ManifestPlugin({ output: 'manifest.js' })
                 ]
             }
         }

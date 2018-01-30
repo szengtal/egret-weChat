@@ -7,7 +7,8 @@ module weChat {
         private _helpPanel: LobbyHelpPanel;
         /**重新开始面板 */
         private _gameOver: gameOver;
-    
+    /**排行榜 */
+    private rank:rankPanel
         constructor() {
             super();
             this.addEvent();
@@ -44,6 +45,9 @@ module weChat {
                  case LobbyUIEventConsts.SHOW_RESTART_PANEL:
                     this.showGameOverPanel();
                     break;
+                  case LobbyUIEventConsts.SHOW_RANK:
+                    this.showRankPanel();
+                    break;
             }
 
         }
@@ -71,7 +75,6 @@ module weChat {
                 this._helpPanel = null;
             }
         }
-
              /**重新开始面板 */
         private showGameOverPanel() {
             if (!this._gameOver) {
@@ -88,6 +91,26 @@ module weChat {
                 LobbyPopupManager.removePopUp("closeGameOver", this._gameOver, true);
                 this._gameOver.destory();
                 this._gameOver = null;
+            }
+        }
+
+
+       /**排行榜 */
+        private showRankPanel() {
+            if (!this.rank) {
+                this.rank = new rankPanel();
+                this.rank.name = "rank";
+                BC.addEvent(this, this.rank, LobbyUIEventConsts.CLOSE, this.closeRank);
+                LobbyPopupManager.addPopUp(["closeRank", this], this.rank, true, true, true, 1280, 720);
+            }
+        }
+        /**排行榜面板移除 */
+        private closeRank() {
+            if (this.rank) {
+                BC.removeEvent(this, this.rank);
+                LobbyPopupManager.removePopUp("closeRank", this.rank, true);
+                this.rank.destory();
+                this.rank = null;
             }
         }
 

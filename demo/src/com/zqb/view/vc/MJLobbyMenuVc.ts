@@ -8,6 +8,7 @@ module weChat {
 		private resetMan: weChat.BaseButton;
 		private _left: weChat.BaseButton;
 		private _right: weChat.BaseButton;
+		private rankBtn: weChat.BaseButton;
 
 
 		public constructor() {
@@ -31,6 +32,7 @@ module weChat {
 			BC.addEvent(this, this.resetMan, egret.TouchEvent.TOUCH_TAP, this.resetManHandle);
 
 
+			BC.addEvent(this, this.rankBtn, egret.TouchEvent.TOUCH_TAP, this.showRank);
 
 			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_BEGIN, this.leftHandle);
 			BC.addEvent(this, this._left, egret.TouchEvent.TOUCH_END, this.leftHandle);
@@ -46,6 +48,11 @@ module weChat {
 		protected removeEvent() {
 			BC.removeEvent(this, null, egret.TouchEvent.TOUCH_TAP, null);
 			BC.removeEvent(this);
+
+		}
+
+		private showRank() {
+			weChatMsgCommand.instance.dispatchChangeEvent(LobbyUIEventConsts.SHOW_RANK, null);
 
 		}
 

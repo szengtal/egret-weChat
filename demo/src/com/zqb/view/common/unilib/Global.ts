@@ -156,13 +156,7 @@
     export class Global {
         public static PhoneCallStatus(msg: any): void {
             if (msg.data.callState == "callDisconnected") {
-                if (egret.Capabilities.supportVersion < "3.2.6") {
-                    setTimeout(function (): void {
-                        if (uniLib["ZQGameSdk"]) {
-                            uniLib["ZQGameSdk"].speakerActive();
-                        }
-                    }, 4000);
-                }
+       
             }
         }
         //JSON字典压缩

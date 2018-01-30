@@ -41,21 +41,9 @@ module uniLib {
             }
             return this._instance;
         }
-        public onActive(e: egret.Event): void {
-            if (this._musicOpen) {
-                if (egret.Capabilities.supportVersion < "3.2.6") {
-                    setTimeout(function (): void {
-                        SoundMgr.instance.resumeBgMusic();
-                    }, 2000);
-                }
-            }
-        }
+    
 
-        public onDeActive(e: egret.Event): void {
-            if (egret.Capabilities.supportVersion < "3.2.6") {
-                SoundMgr.instance.pauseBgMusic();
-            }
-        }
+  
 
 
         //private lastSoundName: string;

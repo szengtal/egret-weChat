@@ -39,8 +39,17 @@
 			</e:Skin>
 		</weChat:skinName>
 	</weChat:BaseButton>
+					<weChat:BaseButton id="rankBtn" label="排行榜" x="55.32" y="164.02" anchorOffsetX="55.32" anchorOffsetY="31.02" width="113" height="71">
+						<weChat:skinName>
+						<e:Skin states="up,down,disabled">
+						<e:Rect width="114" height="68" x="0" y="1" fillColor="0xbed9db" anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"/>
+							<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" textColor="0x160606"/>
+						</e:Skin>
+						</weChat:skinName>
+					</weChat:BaseButton>
     
 
         </e:Group>
+
 
 </e:Skin>

@@ -13,9 +13,9 @@
 	],
 	"game": [
 		"bin-debug/com/zqb/mjl/EventListener/Dictionary.js",
-		"bin-debug/com/zqb/utils/ABaseVc.js",
 		"bin-debug/com/zqb/view/common/BaseEuiPanel.js",
-		"bin-debug/com/zqb/view/common/unilib/utils/DisplayUtils.js",
+		"bin-debug/com/zqb/utils/ABaseVc.js",
+		"bin-debug/com/zqb/view/common/unilib/utils/Utils.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/com/zqb/mjl/consts/EventData.js",
 		"bin-debug/com/zqb/mjl/consts/LobbyUIEventConsts.js",
@@ -44,8 +44,8 @@
 		"bin-debug/com/zqb/view/common/unilib/manager/SoundMgr.js",
 		"bin-debug/com/zqb/view/common/unilib/manager/UIMgr.js",
 		"bin-debug/com/zqb/view/common/unilib/utils/DefinitionUtils.js",
-		"bin-debug/LoadingUI.js",
-		"bin-debug/com/zqb/view/common/unilib/utils/Utils.js",
+		"bin-debug/com/zqb/view/common/unilib/utils/DisplayUtils.js",
+		"bin-debug/common/common.js",
 		"bin-debug/com/zqb/view/common/unilib/views/GameScene.js",
 		"bin-debug/com/zqb/view/common/unilib/views/IScene.js",
 		"bin-debug/com/zqb/view/common/unilib/views/LobbyScene.js",
@@ -76,6 +76,8 @@
 		"bin-debug/com/zqb/view/vc/gameMain/newgame/SpritePool.js",
 		"bin-debug/com/zqb/view/vc/loading/HaoCaiTipLoading.js",
 		"bin-debug/com/zqb/view/vc/LobbyPanel/LobbyHelpPanel.js",
-		"bin-debug/common/common.js"
+		"bin-debug/com/zqb/view/vc/LobbyPanel/rank/rankPanel.js",
+		"bin-debug/com/zqb/view/vc/LobbyPanel/rank/rankPanelItem.js",
+		"bin-debug/LoadingUI.js"
 	]
 }

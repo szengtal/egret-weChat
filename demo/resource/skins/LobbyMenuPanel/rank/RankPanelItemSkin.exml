@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RankPanelItemSkin" width="626" height="95" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="626" height="95" x="0" y="1" anchorOffsetY="0" strokeColor="0x070101" strokeWeight="3"
+	        fillColor="0x0f1b1c" anchorOffsetX="0" />
+	<e:Image id="rankItemBg" source="" x="9.5" y="1" />
+	<e:Label id="rankRanking" text="2" x="10.5" y="33.5" fontFamily="null1" size="28" anchorOffsetX="0" width="134"
+	         textAlign="center" />
+	<e:Label id="rankName" text="小明" x="285" y="14" fontFamily="null1" size="28" />
+	<e:Label id="rankChips" text="第7层" x="526.33" y="37" textColor="0xffd200" fontFamily="null1" size="28" />
+	<e:Image id="rankHead" source="hero1_jpg" x="211" y="14" anchorOffsetX="0" width="74" anchorOffsetY="0" height="74" />
+</e:Skin>
