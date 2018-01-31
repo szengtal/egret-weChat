@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  */
 !function (a) { if ("object" == typeof exports)
-    module.exports = a();
+    module.exports = a(),
+     window.p2=a();
 else if ("function" == typeof define && false)
     define(a);
 else {

@@ -10,7 +10,7 @@ class PublicLoadingView extends egret.Sprite {
     }
 
     private onRemove(e: egret.Event): void {
-        console.error(e);
+        console.error("公共加载");
     }
 
     private backgroud_bmp: egret.Bitmap;

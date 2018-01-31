@@ -29,21 +29,22 @@ export class WxgamePlugin implements plugins.Command {
                 if (filename == "libs/modules/eui/eui.js" || filename == 'libs/modules/eui/eui.min.js') {
                     content += ";window.eui = eui;"
                 }
-                if (filename == "libs/modules/physics/physics.js" || filename == 'libs/modules/physics/physics.min.js') {
-                    content += ";window.p2 = p2;"
-                }
+                // if (filename == "libs/modules/physics/physics.js" || filename == 'libs/modules/physics/physics.min.js') {
+                //     content += ";window.p2 = physics;"
+                // }
 
-                if (filename.indexOf("physics") >= 0) {
-                    content = content.replace(/window.p2={};/gi, "var p2 = {};");
-                    content = content.replace(/window.p2/gi, "p2");
-                    // content += ";window.pako = pako;"
-                    content += ";window.p2 = p2;";
+//                 if (filename.indexOf("physics") >= 0) {
+//                     content = content.replace(/window.p2={};/gi, "var p2 = {};");
+//                     content = content.replace(/window.p2/gi, "p2");
+//                     // content += ";window.pako = pako;"
+//                     content += ";window.p2 = p2;";
+// console.log("window.p2 = p2;");
 
-                }
+//                 }
 
-                if (filename.indexOf("physics") >= 0) {
-                    content += "\n;window.p2 = p2;";
-                }
+                // if (filename.indexOf("physics") >= 0) {
+                //     content += "\n;window.p2 = p2;";
+                // }
 
 
                 if (filename == 'libs/modules/dragonBones/dragonBones.js' || filename == 'libs/modules/dragonBones/dragonBones.min.js') {

@@ -10,7 +10,7 @@ module weChat {
 		private _right: weChat.BaseButton;
 		private rankBtn: weChat.BaseButton;
 
-
+private BottomMenu:eui.Group;
 		public constructor() {
 			super();
 			this.skinName = "LobbyMenuSkin";
@@ -24,6 +24,7 @@ module weChat {
 		protected init(): void {
 			this.touchEnabled = false;
 			// this.touchChildren =false;
+			// this.BottomMenu.y = 
 
 
 		}

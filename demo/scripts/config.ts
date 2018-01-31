@@ -42,10 +42,6 @@ const config: ResourceManagerConfig = {
                     new WxgamePlugin(),
                     new UglifyPlugin([
                         {
-                            sources: ['resource/szLobby.thm.js'],
-                            target: "szLobby.thm.min.js"
-                        },
-                        {
                             sources: ["main.js"],
                             target: "main.min.js"
                         }]),
