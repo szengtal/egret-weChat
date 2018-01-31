@@ -27,7 +27,6 @@ else if ("function" == typeof define && false)
     define(a);
 else {
     var b;
-    debugger;
     "undefined" != typeof window ? b = window : "undefined" != typeof global ? b = global : "undefined" != typeof self && (b = self), b.p2 = a();
 } }(function () {
     return function a(b, c, d) { function e(g, h) { if (!c[g]) {
