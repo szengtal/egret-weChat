@@ -45,7 +45,7 @@ module weChat {
 
             this._hero = weChat.LobbyResUtil.createMovieClicp("jumpMc", "stand");
             this._hero.play(-1);
-            this._hero.scaleX = this._hero.scaleY = 0.7
+            this._hero.scaleX = this._hero.scaleY = 0.5
             this.addChild(this._hero);
             this.stateArr = [];
             this.stateArr.push(this._standData)
@@ -101,10 +101,10 @@ module weChat {
         /**状态控制  站立=0；左跑=1；右跑2；飞=3 */
         public stateHandle(state: number) {
             if(state == 1){
-            this._hero.scaleX = -1;
+            this._hero.scaleX = -0.5;
 
             }else{
-            this._hero.scaleX = 1;
+            this._hero.scaleX = 0.5;
 
             }
             this._hero.movieClipData = this.stateArr[state]

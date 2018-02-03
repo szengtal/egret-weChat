@@ -46,6 +46,9 @@ module weChat {
         private _debug = false
         private debugDraw: p2DebugDraw;
 
+        private isFall: boolean = false//是否到达顶端在下降
+
+
         public constructor() {
 
             super();
@@ -162,6 +165,8 @@ module weChat {
                 rerestitution: -1000,
 
             });
+
+
             heroBody.addShape(heroShape);
             heroBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
             heroBody.damping = 0;//  限行阻尼。取值区间[0,1]
@@ -316,8 +321,17 @@ module weChat {
                 // console.error("heroBody.velocity[0]", heroBody.velocity[0]);
 
                 // 当英雄上升时，位置高于屏幕7/10时，不再上升
-                if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 1) {
-                 this.stopWorld();
+                if (heroBody.velocity[1] > 0 && heroBody.position[1] >= worldH * 0.95) {
+                    //   heroBody.position[1] = worldH * 0.8;
+                    //   heroBody.velocity[0]  = 0 ;
+                    heroBody.velocity[1] = 1 * this.gravity;
+                    if (!this.isFall) {
+                        heroBody.type = p2.Body.KINEMATIC
+                        egret.setTimeout(() => {
+                            this.isFall = false;
+                            heroBody.type = p2.Body.DYNAMIC
+                        }, this, 200)
+                    }
                 }
                 // console.error("heroBody.position[1]",heroBody.position[1]);
 
@@ -328,7 +342,11 @@ module weChat {
                 // 英雄下落时，位置低于屏幕1/10时，不再下降
                 if (heroBody.position[1] <= worldH * 0.1) {
                     // heroBody.position[1] = worldH * 0.7;
-                 this.stopWorld();
+                    this.stopWorld();
+                }
+                 if (heroBody.position[1] <= worldH * 0.6) {
+                    // heroBody.position[1] = worldH * 0.7;
+                            heroBody.type = p2.Body.DYNAMIC
                 }
 
 
@@ -389,7 +407,7 @@ module weChat {
                 } else if (x - floorLength / 2 <= 0) {
                     x = floorLength / 2;
                 }
-                var y = this.lastPosy + 4.5//Math.floor(Math.random()*3 + this.lastPosy);
+                var y = this.lastPosy + 3.1//Math.floor(Math.random()*3 + this.lastPosy);
                 //console.log("y: " + y);
                 this.lastPosy = y;
                 console.error("随机添加台阶", this.lastPosy);
@@ -740,11 +758,11 @@ module weChat {
 
 
         }
-        private stopWorld(){
-   egret.Ticker.getInstance().unregister(this.worldLogic, this)
-                    // this.hero.changeDied();
-                    // this.world.clear()
-                    weChat.variableCommon.getInstance().showReStartPanel();
+        private stopWorld() {
+            egret.Ticker.getInstance().unregister(this.worldLogic, this)
+            // this.hero.changeDied();
+            // this.world.clear()
+            weChat.variableCommon.getInstance().showReStartPanel();
         }
 
         public reStart() {
