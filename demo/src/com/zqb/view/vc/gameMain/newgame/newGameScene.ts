@@ -407,7 +407,7 @@ module weChat {
                 } else if (x - floorLength / 2 <= 0) {
                     x = floorLength / 2;
                 }
-                var y = this.lastPosy + 3.1//Math.floor(Math.random()*3 + this.lastPosy);
+                var y = this.lastPosy + weChat.variableCommon.space//Math.floor(Math.random()*3 + this.lastPosy);
                 //console.log("y: " + y);
                 this.lastPosy = y;
                 console.error("随机添加台阶", this.lastPosy);
@@ -421,9 +421,9 @@ module weChat {
             ran1 = Math.floor((ran1 / count) * this.posArray.length)
             ran2 = Math.floor((ran2 / count) * this.posArray.length)
             ran3 = this.posArray.length - ran1 - ran2;
-            console.error(" this.posArray", this.posArray, "count", count);
+            // console.error(" this.posArray", this.posArray, "count", count);
 
-            console.error(" ran1", ran1, "ran2", ran2, "ran3", ran3);
+            // console.error(" ran1", ran1, "ran2", ran2, "ran3", ran3);
 
             // debugger;
             var boxShape;

@@ -20,6 +20,8 @@ module weChat {
 
         private _pilesNum: number = 0 //层数
 
+        public static space:number = 3.1//生成台阶时候的间隔
+
         /**缩放 */
         public sclaeNum: number = uniLib.Global.screenHeight / 720;
         public constructor() {
