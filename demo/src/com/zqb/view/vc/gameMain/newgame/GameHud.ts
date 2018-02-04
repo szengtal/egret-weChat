@@ -7,7 +7,7 @@ module weChat {
         private stageH: number;
         public scoreLabel: egret.TextField;
         public pilesLabel: egret.TextField;//层数
-        
+
         private timeBarBg: egret.Bitmap;
         private timeBar: egret.Bitmap;
         private factor: number = 50;
@@ -21,10 +21,11 @@ module weChat {
         private preScore: number = 0;
         private curScore: number = 0;
 
-private gameScene:newGameScene
+        private gameScene: newGameScene
         private hero: Hero;
         private heroBody: p2.Body;
         private heroBody1: p2.Body;
+        private isRight: Boolean;
 
         public constructor(gameScene: newGameScene) {
 
@@ -35,6 +36,7 @@ private gameScene:newGameScene
         }
 
         private init(gameScene: newGameScene): void {
+            this.isRight = true;
 
             this.stageH = egret.MainContext.instance.stage.stageHeight;
             this.stageW = egret.MainContext.instance.stage.stageWidth;
@@ -67,10 +69,10 @@ private gameScene:newGameScene
                 case LobbyUIEventConsts.TURN_RIGHT:
                     this.rightBtnCallback(rev);
                     break;
-                  case LobbyUIEventConsts.PILES_CHANGE:
+                case LobbyUIEventConsts.PILES_CHANGE:
                     this.pilesHandle();
                     break;
-                 case LobbyUIEventConsts.RE_START:
+                case LobbyUIEventConsts.RE_START:
                     this.reStart();
                     break;
             }
@@ -97,7 +99,7 @@ private gameScene:newGameScene
             scoreLabel.italic = true;
             this.scoreLabel = scoreLabel;
 
-              // 初始层数标签
+            // 初始层数标签
             var pilesLabel = new egret.TextField();
             this.addChild(pilesLabel);
             pilesLabel.anchorOffsetX = pilesLabel.width / 2;
@@ -159,6 +161,7 @@ private gameScene:newGameScene
         private leftBtnCallback(evt: egret.TouchEvent): void {
 
             if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
+                this.isRight = false;
                 //console.log("touch begin");
                 this.leftTimer.start();
                 weChat.variableCommon.getInstance().hero.stateHandle(1)
@@ -167,7 +170,7 @@ private gameScene:newGameScene
             else if (evt.type == egret.TouchEvent.TOUCH_END) {
                 //console.log("touch ended");
                 this.heroBody.velocity[0] = 1;
-                
+
                 this.leftTimer.reset();
                 this.heroState.start();
 
@@ -175,7 +178,7 @@ private gameScene:newGameScene
             else if (evt.type == egret.TouchEvent.TOUCH_RELEASE_OUTSIDE) {
                 //console.log("touch cancel");
                 this.heroBody.velocity[0] = 1;
-                
+
                 this.heroState.start();
 
             }
@@ -186,6 +189,7 @@ private gameScene:newGameScene
         private rightBtnCallback(evt: egret.TouchEvent): void {
 
             if (evt.type == egret.TouchEvent.TOUCH_BEGIN) {
+                this.isRight = true;
                 //console.log("touch begin");
                 weChat.variableCommon.getInstance().hero.stateHandle(2)
                 this.heroState.stop();
@@ -230,7 +234,7 @@ private gameScene:newGameScene
         private heroStay() {
             var heroBody = this.heroBody;
             heroBody.velocity[0] = 0
-            heroBody.position[1] = egret.MainContext.instance.stage.stageHeight/50-2
+            heroBody.position[1] = egret.MainContext.instance.stage.stageHeight / 50 - 2
             heroBody.position[0] = 5
 
             //    var heroBody1 = this.heroBody1;
@@ -243,11 +247,19 @@ private gameScene:newGameScene
             var heroBody = this.heroBody;
             /**当大于0说明在上升 站立*/
             if (heroBody.velocity[1] > 0) {
-                weChat.variableCommon.getInstance().hero.stateHandle(0)
+                //判断当前向左或向右站立
+                if (this.isRight) {
+                    weChat.variableCommon.getInstance().hero.stateHandle(0);
+                } else {
+                    weChat.variableCommon.getInstance().hero.stateHandle(4);
+                }
             }
             else if (heroBody.velocity[1] <= 0) {
-                weChat.variableCommon.getInstance().hero.stateHandle(3)
-
+                if (this.isRight) {
+                    weChat.variableCommon.getInstance().hero.stateHandle(3)
+                } else {
+                    weChat.variableCommon.getInstance().hero.stateHandle(5);
+                }
             }
         }
 
@@ -276,11 +288,11 @@ private gameScene:newGameScene
         }
 
 
-        private pilesHandle(){
-            this.pilesLabel.text  ="第" +weChat.variableCommon.getInstance().pilesNum+"层";
+        private pilesHandle() {
+            this.pilesLabel.text = "第" + weChat.variableCommon.getInstance().pilesNum + "层";
         }
 
-        private reStart(){
+        private reStart() {
             weChat.variableCommon.getInstance().pilesNum = 0;
             this.gameScene.reStart();
             this.heroStay();

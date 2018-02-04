@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LobbyMainSceneSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:weChat="weChat.*">
+	<e:Image id="standardScene" source="sz_lobby_stadard" x="226.15" y="435.76" visible="true" anchorOffsetX="0" width="268.18" anchorOffsetY="0" height="286.36"/>
+
+  
+
+<weChat:BaseButton id="help" name="help" x="628.07" y="46.97" anchorOffsetX="70.86" anchorOffsetY="46.97" width="128.85">
+                <weChat:skinName>
+                    <e:Skin states="up,down,disabled">
+                        <e:Image  source="help_png"
+                                 source.down="help_png" source.disabled=""  anchorOffsetY="0" height="118.48" anchorOffsetX="0" width="124.25" x="4.6"/>
+                    </e:Skin>
+                </weChat:skinName>
+    </weChat:BaseButton>
+
+
+
+
+
+	<e:Image id="mainSceneVip" x="93" y="50" source=""/>
+</e:Skin>

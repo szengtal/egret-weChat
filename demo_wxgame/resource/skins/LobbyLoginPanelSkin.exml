@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="lobbyLoginPanelSkin" width="1280" height="720" xmlns:e="http://ns.egret.com/eui" xmlns:weChat="weChat.*" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="_panelBg" source="Login_Panel_json.Login_bg" x="1.52" y="0"/>
+	<e:Image source="Login_Panel_json.Login_Logo" x="326.06" y="16.58"/>
+	<e:Group id="_loginWay" width="1049.33" height="344" x="127.06" y="371.99" anchorOffsetX="0" anchorOffsetY="0">
+
+		<weChat:BaseButton id="_zqbLogin" name="zqbLogin" label="" x="528.33" y="137.66" anchorOffsetX="129" anchorOffsetY="47.67" scaleX="1" scaleY="1" visible="false">
+			<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_zqb"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+
+
+		<weChat:BaseButton id="_touristLogin" name="tourist" label="" x="231.66" y="137.66" anchorOffsetX="129" anchorOffsetY="47.67" scaleX="1" scaleY="1">
+			<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_Panel_json.Login_tourist"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+		<weChat:BaseButton id="_winxinLogin" name="weixin" label="" x="528.33" y="137.66" anchorOffsetX="131.67" anchorOffsetY="46.33" scaleX="1" scaleY="1">
+			<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_Panel_json.Login_winxin"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+			</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+
+			<weChat:BaseButton id="_huaweiLogin" name="huawei" label="" x="528.33" y="137.66" anchorOffsetX="131.67" anchorOffsetY="46.33" scaleX="1" scaleY="1" visible="false">
+			<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_huawei"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+			</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+		<weChat:BaseButton id="_phoneLogin" name="phone" label="" x="826.33" y="137.66" anchorOffsetX="130.33" anchorOffsetY="46.33" scaleX="1" scaleY="1">
+			<weChat:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_Panel_json.Login_phone"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+			</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+	</e:Group>
+	<e:Group id="_LoginByPhone" width="1052" height="358.3" x="111.72" y="351.08" anchorOffsetX="0" anchorOffsetY="0" visible="false">
+		<e:Image source="Login_Panel_json.Login_input_bg" x="161.28" y="-15.5"/>
+
+		<weChat:BaseButton id="_backB" label="" x="364.61" y="310.51" anchorOffsetX="129.11" anchorOffsetY="50.21" scaleX="1" scaleY="1">
+			<weChat:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_Panel_json.Login_back_b"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+				</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+		<weChat:BaseButton id="_login" label="" x="697.54" y="306.63" anchorOffsetX="132.99" anchorOffsetY="46.33" scaleX="1" scaleY="1">
+			<weChat:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_Panel_json.Login_btn"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+				</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+		<weChat:BaseButton id="_resetPassword" label="" x="798.7" y="134.58" anchorOffsetX="83.66" anchorOffsetY="29" scaleX="1" scaleY="1" width="160" height="63">
+			<weChat:skinName>
+				<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="Login_resetPassword"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" xmlns:tween="egret.tween.*"/>
+				</e:Skin>
+			</weChat:skinName>
+		</weChat:BaseButton>
+		<e:Image source="Login_Panel_json.Login_input" x="365.5" y="28.86"/>
+		<e:Image source="Login_Panel_json.Login_input" x="365.5" y="109.5"/>
+		<e:EditableText id="_account" width="316.67" height="50" text="" x="370" y="32" anchorOffsetX="0" anchorOffsetY="0" verticalAlign="middle" fontFamily="null1"  displayAsPassword="false" maxChars="11"/>
+		<e:EditableText id="_password" width="316.67" height="50" text="" x="370" y="109.24" anchorOffsetX="0" anchorOffsetY="0" verticalAlign="middle" fontFamily="null1" displayAsPassword="true"  maxChars="20" inputType="password"/>
+		<e:Image source="mjl_login_chenkbg" x="367.51" y="178.08"/>
+		<e:CheckBox id="_remPassword" label="" x="367.51" y="178.08">
+			<e:skinName>
+			<e:Skin states="up,down,disabled">
+				<e:Image width="100%" height="100%" source="mjl_login_chenkbg" source.down="mjl_login_chenk"/>
+				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+			</e:skinName>
+		</e:CheckBox>
+		<e:Label text="记住账号" x="415.46" y="179.58" textColor="0xa6d808" fontFamily="null1" size="26"/>
+		<e:Label id="_warmUp" text="" x="306" y="231" anchorOffsetX="0" width="455" verticalAlign="middle" textAlign="center" fontFamily="null1" textColor="0xff0000"/>
+	</e:Group>
+</e:Skin>

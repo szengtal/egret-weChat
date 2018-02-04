@@ -1,0 +1,8 @@
+{"file":"sz_Lobby_Scene.png","frames":{
+"common":{"x":804,"y":0,"w":111,"h":99,"offX":0,"offY":0,"sourceW":113,"sourceH":101},
+"sz_Lobby_Item1":{"x":0,"y":804,"w":400,"h":400,"offX":0,"offY":0,"sourceW":400,"sourceH":400},
+"sz_Lobby_Item2":{"x":402,"y":402,"w":400,"h":400,"offX":0,"offY":0,"sourceW":400,"sourceH":400},
+"sz_Lobby_Item3":{"x":0,"y":402,"w":400,"h":400,"offX":0,"offY":0,"sourceW":400,"sourceH":400},
+"sz_Lobby_Item4":{"x":402,"y":0,"w":400,"h":400,"offX":0,"offY":0,"sourceW":400,"sourceH":400},
+"sz_Lobby_Item5":{"x":0,"y":0,"w":400,"h":400,"offX":0,"offY":0,"sourceW":400,"sourceH":400},
+"sz_lobby_stadard":{"x":402,"y":804,"w":350,"h":350,"offX":0,"offY":0,"sourceW":350,"sourceH":350}}}

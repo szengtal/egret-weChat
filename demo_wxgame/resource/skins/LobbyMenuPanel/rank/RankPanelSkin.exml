@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RankPanelSkin" width="720" height="1280" xmlns:e="http://ns.egret.com/eui" xmlns:tween="egret.tween.*" xmlns:w="http://ns.egret.com/wing" xmlns:SZLobby="weChat.*">
+
+
+
+	<e:Image id="rankItemBg" source="Lobbybg_jpg" x="0" y="1" width="720" height="1280"/>
+
+    
+    
+<e:Scroller id="rankScroll" x="58" anchorOffsetX="0" anchorOffsetY="0" bounces="false" scrollPolicyH="off" height="617.79" width="636" y="291">
+        <e:List id="rankList" height="453.66" itemRendererSkinName="RankPanelItemSkin"
+                anchorOffsetX="0" anchorOffsetY="0" y="-30.67"  x="0">
+            <e:ArrayCollection>
+                <e:Array>
+                    <e:Object/>
+                    <e:Object/>
+                    <e:Object dsf="null" />
+                    <e:Object dsf="null" />
+                    <e:Object dsf="null" />
+                    <e:Object dsf="null" />
+                    <e:Object dsf="null" />
+					<e:Object dsf="null" />
+                    <e:Object dsf="null" />
+                    <e:Object dsf="null" />
+                </e:Array>
+            </e:ArrayCollection>
+            <e:layout>
+                <e:VerticalLayout gap="3" paddingLeft="0" />
+            </e:layout>
+        </e:List>
+    </e:Scroller>
+	<e:Label text="名次" x="159" y="197" anchorOffsetX="-2" anchorOffsetY="-1" size="28" fontFamily="null1" textColor="0x3f0606"/>
+	<e:Label text="成绩" x="435" y="198" anchorOffsetX="-2" anchorOffsetY="-1" size="28" fontFamily="null1" textColor="0x381010"/>
+	<e:Label text="昵称" x="331" y="197" anchorOffsetX="-2" anchorOffsetY="-1" size="28" fontFamily="null1" textColor="0x6d1111"/>
+
+
+    
+
+
+
+    
+<SZLobby:BaseButton  id="rankBack" label="" x="27.5" y="33" anchorOffsetX="29" anchorOffsetY="25" scaleX="0.4" scaleY="0.4">
+		<SZLobby:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="backHome_png" source.down="backHome_png"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</SZLobby:skinName>
+	</SZLobby:BaseButton>
+
+</e:Skin>

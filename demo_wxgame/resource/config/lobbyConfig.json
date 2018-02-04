@@ -1,0 +1,14 @@
+{
+	"default": {
+		"login_url": "http://14.17.104.12:9000/httplogin",
+		"login_url_test": "http://server.login.bwgame.com.cn:9000/httplogin",
+		"gameid":9010,
+		"zoneid":116,
+		"version":"06081811",
+		"debug_level":5,
+		"notice":{
+			"version":"20160907",
+			"desc":"<font size='28'></font>"
+		}   
+	}   
+}
