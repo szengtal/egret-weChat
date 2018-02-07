@@ -52,6 +52,8 @@ module weChat {
             this.stateArr.push(this._runData)
             this.stateArr.push(this._runData)
             this.stateArr.push(this._flyData)
+            this.stateArr.push(this._standData)
+            this.stateArr.push(this._flyData)
 
             //每秒计时一次
             this.rundTimer = new egret.Timer(1000, 0);
@@ -98,13 +100,13 @@ module weChat {
                 this.changeNormal();
             }
         }
-        /**状态控制  站立=0；左跑=1；右跑2；飞=3 */
+        /**状态控制  向右站立=0；左跑=1；右跑2；右飞=3 ; 向左站立 4;左飞 5*/
         public stateHandle(state: number) {
-            if(state == 1){
-            this._hero.scaleX = -0.5;
+            if (state == 1 || state == 4 || state == 5) {
+                this._hero.scaleX = -0.5;
 
-            }else{
-            this._hero.scaleX = 0.5;
+            } else {
+                this._hero.scaleX = 0.5;
 
             }
             this._hero.movieClipData = this.stateArr[state]

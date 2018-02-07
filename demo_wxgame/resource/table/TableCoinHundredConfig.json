@@ -1,0 +1,7 @@
+[
+{"id":53,"gameId":4130,"GameName":"新手场","roomType":1,"roomName":"新手场","lowestBetChips":200,"lowestCarry":1000,"highestCarry":50000,"coinGameCost":0.05,"userNum":5,"robotLowestCarry":5000,"robotHighestCarry":50000,"imageName":""},
+{"id":54,"gameId":4130,"GameName":"新手场","roomType":2,"roomName":"进阶场","lowestBetChips":1000,"lowestCarry":10000,"highestCarry":500000,"coinGameCost":0.05,"userNum":5,"robotLowestCarry":20000,"robotHighestCarry":500000,"imageName":""},
+{"id":55,"gameId":4130,"GameName":"新手场","roomType":3,"roomName":"初级场","lowestBetChips":5000,"lowestCarry":50000,"highestCarry":2500000,"coinGameCost":0.05,"userNum":5,"robotLowestCarry":100000,"robotHighestCarry":2500000,"imageName":""},
+{"id":56,"gameId":4130,"GameName":"新手场","roomType":4,"roomName":"中级场","lowestBetChips":20000,"lowestCarry":200000,"highestCarry":0,"coinGameCost":0.05,"userNum":5,"robotLowestCarry":400000,"robotHighestCarry":3000000,"imageName":""},
+{"id":57,"gameId":4130,"GameName":"新手场","roomType":5,"roomName":"高级场","lowestBetChips":200000,"lowestCarry":1000000,"highestCarry":0,"coinGameCost":0.03,"userNum":5,"robotLowestCarry":2000000,"robotHighestCarry":20000000,"imageName":""}
+]
