@@ -10,17 +10,17 @@ module weChat {
         public preFloor: p2.Body;// 前一个台阶
         public hero: Hero;
         private factor: number;
-        private _isDebug: boolean = true;// debug，是否绘制物理碰撞框
+        private _isDebug: boolean = false;// debug，是否绘制物理碰撞框
         // 需要用到的数据
         private floatFloorSpeedX: number = 6;// 浮动台阶左右移动的最大速度
         private gravity: number = -10;// 重力，物体下落速度
         private jumpSpeed: number = 1;// 英雄的跳跃速度
         private gameSpeed: number = 3;// 台子上升的速度
 
-        private stableFloor_MAX: number = 6;// 屏幕中最大的坚固台阶个数
+        private stableFloor_MAX: number = 5;// 屏幕中最大的坚固台阶个数
         private stableFloor_min: number = 3;// 屏幕中最小的坚固台阶个数
-        private breakableFloor_MAX: number = 2;// 屏幕中最大的易碎台阶个数
-        private floatFloor_MAX: number = 4;// 屏幕中最大的浮动台阶个数
+        private breakableFloor_MAX: number = 4;// 屏幕中最大的易碎台阶个数
+        private floatFloor_MAX: number = 3;// 屏幕中最大的浮动台阶个数
 
         private stageW: number;
         private stageH: number;
@@ -247,11 +247,11 @@ module weChat {
                 if (evt.bodyA != heroBody && evt.bodyB != heroBody) {
                     return;
                 }
-                // if(evt.bodyA == heroBody && breakableFloor.indexOf(evt.bodyB) == -1){
-                //     curFloor = evt.bodyB;
-                // }else if(evt.bodyB == heroBody && breakableFloor.indexOf(evt.bodyA) == -1){
-                //     curFloor = evt.bodyA;
-                // }
+                if(evt.bodyA == heroBody && breakableFloor.indexOf(evt.bodyB) == -1){
+                    curFloor = evt.bodyB;
+                }else if(evt.bodyB == heroBody && breakableFloor.indexOf(evt.bodyA) == -1){
+                    curFloor = evt.bodyA;
+                }
 
             }, this);
 
@@ -259,7 +259,7 @@ module weChat {
             //  碰撞结束。
             this.world.on("endContact", function (evt) {
                 curFloor = null;
-                if (1) return;
+                // if (1) return;
                 // 踩到破碎台阶后的逻辑
                 var breakableIndex = breakableFloor.indexOf(evt.bodyA);
                 if (breakableIndex == -1) {
@@ -504,8 +504,6 @@ module weChat {
                 for (var i = 0; i < ran2; i++) {
                     //添加方形刚体
                     var display = spritePool.getObject(2);
-                    // boxShape = new p2.Line();
-                    // boxShape.length = floorLength
                     boxShape = new p2.Box({ width: 3.5, height: 1 });
                     // console.error("保存敌人坐标22this.posArray",this.posArray);
                     if (this.posArray.length == 0) {
@@ -524,7 +522,6 @@ module weChat {
                         //position: this.posArray.pop()
                         position: pos1
                     });
-                    // console.error("添加砖块2", boxBody.position);
 
                     boxBody.addShape(boxShape);
                     boxBody.angularDamping = 0;//  角阻尼。取值区间[0,1]
@@ -538,14 +535,13 @@ module weChat {
                         display2.anchorOffsetY = display2.height / 2;
                         boxBody.displays = [display2];
                         this.addChild(display2);
-
-
+                    console.error("添加砖块2", boxBody.position);
+                        
                     } else {
                         display.anchorOffsetX = display.width / 2;
                         display.anchorOffsetY = display.height / 2;
                         boxBody.displays = [display];
                         this.addChild(display);
-
                     }
 
                 }
