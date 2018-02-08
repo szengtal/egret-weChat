@@ -22,7 +22,7 @@
 		},
 		{
 			"name": "preload",
-			"keys": ""
+			"keys": "line1_png_png,line3_png_png"
 		}
 	],
 	"resources": [
@@ -190,6 +190,16 @@
 		},
 		{
 			"name": "line3_png",
+			"type": "image",
+			"url": "assets/lobby/main/line3_png.png"
+		},
+		{
+			"name": "line1_png_png",
+			"type": "image",
+			"url": "assets/lobby/main/line1_png.png"
+		},
+		{
+			"name": "line3_png_png",
 			"type": "image",
 			"url": "assets/lobby/main/line3_png.png"
 		}
