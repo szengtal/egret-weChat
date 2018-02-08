@@ -222,6 +222,7 @@ module weChat {
         }
 
         private rightMove() {
+            
             var heroBody = this.heroBody;
             //  向右移动
             if (heroBody.velocity[0] < 7) {

@@ -33,6 +33,7 @@ module weChat {
         private heroShape: p2.Shape;// 主角形状
         public heroBody: p2.Body;// 主角
         public heroBody1: p2.Body;// 主角
+        private groundBody: p2.Body//左右的墙壁
 
         private floatFloor: p2.Body[] = [];// 浮动的台阶刚体集合
         private stableFloor: p2.Body[] = [];// 坚固的台阶刚体集合
@@ -150,6 +151,23 @@ module weChat {
             //    }
             //
             //}
+            //添加右侧墙壁
+            var stageHeight: number = egret.MainContext.instance.stage.stageHeight;
+            var groundShape: p2.Plane = new p2.Plane();
+            this.groundBody = new p2.Body();
+            this.groundBody.position[0] = 0//this.worldW;
+            this.groundBody.angle = -Math.PI / 2;
+            this.groundBody.addShape(groundShape);
+            this.world.addBody(this.groundBody);
+
+            // var groundShape1: p2.Shape = new p2.Shape();
+            // var groundBody1: p2.Body = new p2.Body();
+            // groundBody1.position[0] = this.worldW;
+            // groundBody1.angle = Math.PI / 2;
+            // groundBody1.addShape(groundShape1);
+            // this.world.addBody(groundBody1);
+
+
 
             //  添加英雄刚体
             var hero = new Hero();
@@ -247,9 +265,9 @@ module weChat {
                 if (evt.bodyA != heroBody && evt.bodyB != heroBody) {
                     return;
                 }
-                if(evt.bodyA == heroBody && breakableFloor.indexOf(evt.bodyB) == -1){
+                if (evt.bodyA == heroBody && breakableFloor.indexOf(evt.bodyB) == -1) {
                     curFloor = evt.bodyB;
-                }else if(evt.bodyB == heroBody && breakableFloor.indexOf(evt.bodyA) == -1){
+                } else if (evt.bodyB == heroBody && breakableFloor.indexOf(evt.bodyA) == -1) {
                     curFloor = evt.bodyA;
                 }
 
@@ -302,18 +320,18 @@ module weChat {
                 if (heroBody.velocity[1] < this.gravity) {
                     heroBody.velocity[1] = 1.5 * this.gravity;
                 }
-                if (1) {
+                // 根据英雄位置情况判断墙壁不同的位置
+                if (heroBody.position[0] < worldW / 2) {
+                    this.groundBody.position[0] = 0//this.worldW;
+                    this.groundBody.angle = -Math.PI / 2;
                     //  return
                 }
-                //  如果英雄超出屏幕左边，则从右边出现，如果超出右边，则从左边出现
-                if (heroBody.position[0] + radius <= 0) {
-                    heroBody.velocity[0] = 0;
-                    heroBody.position[0] = radius
-
-                } else if (heroBody.position[0] - radius >= worldW) {
-                    heroBody.velocity[0] = 0;
-                    heroBody.position[0] = worldW - radius
+                else {
+                    this.groundBody.position[0] = this.worldW;
+                    this.groundBody.angle = Math.PI / 2;
                 }
+                //  如果英雄超出屏幕左边，则从右边出现，如果超出右边，则从左边出现
+              
                 //限制左右最大速度
                 if (heroBody.velocity[0] > 8) {
                     heroBody.velocity[0] = 8
@@ -344,9 +362,9 @@ module weChat {
                     // heroBody.position[1] = worldH * 0.7;
                     this.stopWorld();
                 }
-                 if (heroBody.position[1] <= worldH * 0.6) {
+                if (heroBody.position[1] <= worldH * 0.6) {
                     // heroBody.position[1] = worldH * 0.7;
-                            heroBody.type = p2.Body.DYNAMIC
+                    heroBody.type = p2.Body.DYNAMIC
                 }
 
 
@@ -535,8 +553,8 @@ module weChat {
                         display2.anchorOffsetY = display2.height / 2;
                         boxBody.displays = [display2];
                         this.addChild(display2);
-                    console.error("添加砖块2", boxBody.position);
-                        
+                        console.error("添加砖块2", boxBody.position);
+
                     } else {
                         display.anchorOffsetX = display.width / 2;
                         display.anchorOffsetY = display.height / 2;

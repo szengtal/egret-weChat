@@ -17,8 +17,7 @@ module weChat {
         public sprite: egret.Bitmap;
         public mcDataFactory: egret.MovieClipDataFactory;
         public _hero: egret.MovieClip;
-        public stateArr = []
-
+        public stateArr = [];
         public constructor() {
             super();
             this.init();
@@ -107,12 +106,10 @@ module weChat {
 
             } else {
                 this._hero.scaleX = 0.5;
-
             }
             this._hero.movieClipData = this.stateArr[state]
             this._hero.play(-1);
         }
-
 
     }
 }
