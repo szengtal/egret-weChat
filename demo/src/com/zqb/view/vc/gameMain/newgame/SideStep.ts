@@ -15,10 +15,39 @@ module weChat {
 
             this.type = type;
             var sprite = new egret.Bitmap();
-            if (type == 1 || type == 3) {
-                sprite.texture = RES.getRes("enemy2_png");
-            } else if (type == 2) {
+            //固定云
+            if (type == 1) {
+                var model = Math.floor(Math.random() * 5);
+                console.error("随机数"+model);
+                switch (model) {
+                    case 0:
+                        sprite.texture = RES.getRes("cloud_01_png");
+                        break;
+                    case 1:
+                        sprite.texture = RES.getRes("cloud_02_png");
+                        break;
+                    case 2:
+                        sprite.texture = RES.getRes("cloud_03_png");
+                        break;
+                    case 3:
+                        sprite.texture = RES.getRes("cloud_04_png");
+                        break;
+                    case 4:
+                        sprite.texture = RES.getRes("cloud_05_png");
+                        break;
+                    default:
+                        sprite.texture = RES.getRes("cloud_01_png");
+                        break;
+
+                }
+            }
+            //会碎的云
+            else if (type == 2) {
                 sprite.texture = RES.getRes("line1_png");
+            }
+            //移动云
+            else if (type == 3) {
+                sprite.texture = RES.getRes("cloud_moveable_png");
             }
             this.anchorOffsetX = sprite.width / 2;
             this.anchorOffsetY = 0;

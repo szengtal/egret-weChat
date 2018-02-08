@@ -9,7 +9,7 @@
 			"name": "sz_table"
 		},
 		{
-			"keys": "background_png,help_png,backHome_png,sz_Lobby_Help_json,sz_Lobby_Scene_json,Lobbybg_jpg,sz_Lobby_market_fnt_fnt,loading_png,common_png,jumpMc_json,jumpMc_png,midwindow_jpg,line1_png,line3_png",
+			"keys": "background_png,help_png,backHome_png,sz_Lobby_Help_json,sz_Lobby_Scene_json,Lobbybg_jpg,sz_Lobby_market_fnt_fnt,loading_png,common_png,jumpMc_json,jumpMc_png,midwindow_jpg,line1_png,line3_png,cloud_01_png,cloud_moveable_png,cloud_02_png,cloud_03_png,cloud_04_png,cloud_05_png",
 			"name": "sz_assets"
 		},
 		{
@@ -21,157 +21,177 @@
 			"name": "sz_sound"
 		},
 		{
-			"name": "preload",
-			"keys": "line1_png_png,line3_png_png,cloud_01_png,cloud_moveable_png"
+			"keys": "line1_png_png,line3_png_png",
+			"name": "preload"
 		}
 	],
 	"resources": [
 		{
-			"name": "gameList_json",
+			"url": "table/gameList.json",
 			"type": "json",
-			"url": "table/gameList.json"
+			"name": "gameList_json"
 		},
 		{
-			"name": "lobbyConfig_json",
+			"url": "config/lobbyConfig.json",
 			"type": "json",
-			"url": "config/lobbyConfig.json"
+			"name": "lobbyConfig_json"
 		},
 		{
-			"name": "Lobbybg_jpg",
+			"url": "assets/lobby/main/Lobbybg.jpg",
 			"type": "image",
-			"url": "assets/lobby/main/Lobbybg.jpg"
+			"name": "Lobbybg_jpg"
 		},
 		{
-			"name": "sz_Lobby_market_fnt_fnt",
+			"url": "assets/lobby/font/sz_Lobby_market_fnt.fnt",
 			"type": "font",
-			"url": "assets/lobby/font/sz_Lobby_market_fnt.fnt"
+			"name": "sz_Lobby_market_fnt_fnt"
 		},
 		{
-			"name": "newPlayerOpen_mp3",
+			"url": "assets/sound/newPlayerOpen.mp3",
 			"type": "sound",
-			"url": "assets/sound/newPlayerOpen.mp3"
+			"name": "newPlayerOpen_mp3"
 		},
 		{
-			"name": "newPlayerDrop_mp3",
+			"url": "assets/sound/newPlayerDrop.mp3",
 			"type": "sound",
-			"url": "assets/sound/newPlayerDrop.mp3"
+			"name": "newPlayerDrop_mp3"
 		},
 		{
-			"name": "buttonClick_mp3",
+			"url": "assets/sound/buttonClick.mp3",
 			"type": "sound",
-			"url": "assets/sound/buttonClick.mp3"
+			"name": "buttonClick_mp3"
 		},
 		{
-			"name": "buttonSwitch_mp3",
+			"url": "assets/sound/buttonSwitch.mp3",
 			"type": "sound",
-			"url": "assets/sound/buttonSwitch.mp3"
+			"name": "buttonSwitch_mp3"
 		},
 		{
-			"name": "rewardSound_mp3",
+			"url": "assets/sound/rewardSound.mp3",
 			"type": "sound",
-			"url": "assets/sound/rewardSound.mp3"
+			"name": "rewardSound_mp3"
 		},
 		{
-			"name": "sz_Lobby_Loading_png",
+			"url": "assets/dragonMovie/sz_Lobby_Loading.png",
 			"type": "image",
-			"url": "assets/dragonMovie/sz_Lobby_Loading.png"
+			"name": "sz_Lobby_Loading_png"
 		},
 		{
-			"name": "sz_Lobby_Loading_json",
+			"url": "assets/dragonMovie/sz_Lobby_Loading.json",
 			"type": "json",
-			"url": "assets/dragonMovie/sz_Lobby_Loading.json"
+			"name": "sz_Lobby_Loading_json"
 		},
 		{
-			"name": "loading_png",
+			"url": "assets/lobby/main/loading.png",
 			"type": "image",
-			"url": "assets/lobby/main/loading.png"
+			"name": "loading_png"
 		},
 		{
-			"name": "common_png",
+			"url": "assets/lobby/main/common.png",
 			"type": "image",
-			"url": "assets/lobby/main/common.png"
+			"name": "common_png"
 		},
 		{
-			"name": "sz_Lobby_Scene_json",
-			"type": "sheet",
 			"url": "assets/lobby/main/sz_Lobby_Scene.json",
+			"type": "sheet",
+			"name": "sz_Lobby_Scene_json",
 			"subkeys": "common,sz_Lobby_Item1,sz_Lobby_Item2,sz_Lobby_Item3,sz_Lobby_Item4,sz_Lobby_Item5,sz_lobby_stadard"
 		},
 		{
-			"name": "sz_Lobby_Help_json",
-			"type": "sheet",
 			"url": "assets/lobby/main/sz_Lobby_Help.json",
+			"type": "sheet",
+			"name": "sz_Lobby_Help_json",
 			"subkeys": "sz_Lobby_help_btn1,sz_Lobby_help_btn2"
 		},
 		{
-			"name": "backHome_png",
+			"url": "assets/lobby/main/backHome.png",
 			"type": "image",
-			"url": "assets/lobby/main/backHome.png"
+			"name": "backHome_png"
 		},
 		{
-			"name": "LobbyTaskConfig_json",
+			"url": "table/LobbyTaskConfig.json",
 			"type": "json",
-			"url": "table/LobbyTaskConfig.json"
+			"name": "LobbyTaskConfig_json"
 		},
 		{
-			"name": "TableCoinHundredConfig_json",
+			"url": "table/TableCoinHundredConfig.json",
 			"type": "json",
-			"url": "table/TableCoinHundredConfig.json"
+			"name": "TableCoinHundredConfig_json"
 		},
 		{
-			"name": "help_png",
+			"url": "assets/lobby/main/help.png",
 			"type": "image",
-			"url": "assets/lobby/main/help.png"
+			"name": "help_png"
 		},
 		{
-			"name": "background_png",
+			"url": "assets/lobby/main/background.png",
 			"type": "image",
-			"url": "assets/lobby/main/background.png"
+			"name": "background_png"
 		},
 		{
-			"name": "jumpMc_json",
+			"url": "assets/dragonMovie/jumpMc.json",
 			"type": "json",
-			"url": "assets/dragonMovie/jumpMc.json"
+			"name": "jumpMc_json"
 		},
 		{
-			"name": "jumpMc_png",
+			"url": "assets/dragonMovie/jumpMc.png",
 			"type": "image",
-			"url": "assets/dragonMovie/jumpMc.png"
+			"name": "jumpMc_png"
 		},
 		{
-			"name": "midwindow_jpg",
+			"url": "assets/lobby/main/midwindow.jpg",
 			"type": "image",
-			"url": "assets/lobby/main/midwindow.jpg"
+			"name": "midwindow_jpg"
 		},
 		{
-			"name": "line1_png",
+			"url": "assets/lobby/main/line1_png.png",
 			"type": "image",
-			"url": "assets/lobby/main/line1_png.png"
+			"name": "line1_png"
 		},
 		{
-			"name": "line3_png",
+			"url": "assets/lobby/main/line3_png.png",
 			"type": "image",
-			"url": "assets/lobby/main/line3_png.png"
+			"name": "line3_png"
 		},
 		{
-			"name": "line1_png_png",
+			"url": "assets/lobby/main/line1_png.png",
 			"type": "image",
-			"url": "assets/lobby/main/line1_png.png"
+			"name": "line1_png_png"
 		},
 		{
-			"name": "line3_png_png",
+			"url": "assets/lobby/main/line3_png.png",
 			"type": "image",
-			"url": "assets/lobby/main/line3_png.png"
+			"name": "line3_png_png"
 		},
 		{
-			"name": "cloud_01_png",
+			"url": "assets/lobby/main/cloud_01.png",
 			"type": "image",
-			"url": "assets/lobby/main/cloud_01.png"
+			"name": "cloud_01_png"
 		},
 		{
-			"name": "cloud_moveable_png",
+			"url": "assets/lobby/main/cloud_moveable.png",
 			"type": "image",
-			"url": "assets/lobby/main/cloud_moveable.png"
+			"name": "cloud_moveable_png"
+		},
+		{
+			"name": "cloud_02_png",
+			"type": "image",
+			"url": "assets/lobby/main/cloud_02.png"
+		},
+		{
+			"name": "cloud_03_png",
+			"type": "image",
+			"url": "assets/lobby/main/cloud_03.png"
+		},
+		{
+			"name": "cloud_04_png",
+			"type": "image",
+			"url": "assets/lobby/main/cloud_04.png"
+		},
+		{
+			"name": "cloud_05_png",
+			"type": "image",
+			"url": "assets/lobby/main/cloud_05.png"
 		}
 	]
 }
