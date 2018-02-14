@@ -18,7 +18,6 @@ module weChat {
             //固定云
             if (type == 1) {
                 var model = Math.floor(Math.random() * 5);
-                console.error("随机数"+model);
                 switch (model) {
                     case 0:
                         sprite.texture = RES.getRes("cloud_01_png");
